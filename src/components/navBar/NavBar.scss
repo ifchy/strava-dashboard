@@ -1,0 +1,41 @@
+.navbar {
+  height: 50px;
+  border-bottom: 0.5px solid rgb(163, 162, 162);
+  display: flex;
+  font-size: 14px;
+  color: #555;
+  align-items: center;
+
+  .wrapper {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .items {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      gap: 10px;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+
+        .icon {
+          font-size: 20px;
+        }
+
+        .avatar {
+          height: 36px;
+          width: 36px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
