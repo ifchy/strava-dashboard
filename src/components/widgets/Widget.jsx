@@ -1,26 +1,126 @@
 import "./Widget.scss";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-import PersonIcon from "@mui/icons-material/Person";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import TimerIcon from "@mui/icons-material/Timer";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
+import StraightenIcon from "@mui/icons-material/Straighten";
+import { getStravaData, allData } from "../../features/stravaData";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
 const Widget = ({ type }) => {
-  let data;
+  const dispatch = useDispatch();
+  const dataStatus = useSelector((state) => state.data.status);
+  const { data } = useSelector(allData);
+
+  const oneMonthAgo = moment().add(-1, "months");
+  const twoMonthsAgo = moment().add(-2, "months");
+  const oneMonthData = data.filter((ride) =>
+    moment(ride.start_date).isAfter(oneMonthAgo)
+  );
+  const twoMonthData = data.filter((ride) =>
+    moment(ride.start_date).isAfter(twoMonthsAgo)
+  );
+  const oneMonthSeries = oneMonthData.reduce(
+    (prevTime, thisTime) => {
+      return {
+        elapsedTime: prevTime.elapsedTime + thisTime.elapsed_time,
+        distance: prevTime.distance + thisTime.distance,
+        avgHR: prevTime.avgHR + thisTime.average_heartrate,
+      };
+    },
+    {
+      elapsedTime: 0,
+      distance: 0,
+      avgHR: 0,
+    }
+  );
+  const twoMonthSeries = twoMonthData.reduce(
+    (prevTime, thisTime) => {
+      return {
+        elapsedTime: prevTime.elapsedTime + thisTime.elapsed_time,
+        distance: prevTime.distance + thisTime.distance,
+        avgHR: prevTime.avgHR + thisTime.average_heartrate,
+      };
+    },
+    {
+      elapsedTime: 0,
+      distance: 0,
+      avgHR: 0,
+    }
+  );
+
+  // elapsed_time > 3600
+  //   ? moment.utc(elapsed_time * 1000).format("HH:mm:ss")
+  //   : moment.utc(elapsed_time * 1000).format("mm:ss");
+
+  let widgetCard;
 
   switch (type) {
     case "user":
-      data = {
-        title: "USERS",
-        isMoney: false,
-        icon: <PersonIcon className="icon" />,
+      widgetCard = {
+        title: "WORKOUTS",
+        workouts: oneMonthData.length,
+        className:
+          oneMonthData.length - twoMonthData.length > 0
+            ? "percentage positive"
+            : "percentage negative",
+        icon: <DirectionsRunIcon className="icon" />,
+        change:
+          Math.abs(
+            (oneMonthData.length - twoMonthData.length) / twoMonthData.length
+          ) * 100,
       };
       break;
     case "order":
-      data = { title: "ORDERS", isMoney: false };
+      widgetCard = {
+        title: "TIME",
+        workouts: moment
+          .utc(oneMonthSeries.elapsedTime * 1000)
+          .format("HH:mm:ss"),
+        className:
+          oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime > 0
+            ? "percentage positive"
+            : "percentage negative",
+        icon: <TimerIcon className="icon" />,
+        change:
+          Math.abs(
+            (oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime) /
+              twoMonthSeries.elapsedTime
+          ) * 100,
+      };
       break;
     case "earnings":
-      data = { title: "EARNINGS", isMoney: false };
+      widgetCard = {
+        title: "DISTANCE",
+        workouts: oneMonthSeries.distance,
+        className:
+          oneMonthSeries.distance - twoMonthSeries.distance > 0
+            ? "percentage positive"
+            : "percentage negative",
+        icon: <StraightenIcon className="icon" />,
+        change:
+          Math.abs(
+            (oneMonthSeries.distance - twoMonthSeries.distance) /
+              twoMonthSeries.distance
+          ) * 100,
+      };
       break;
     case "balance":
-      data = { title: "BALANCE", isMoney: false };
+      widgetCard = {
+        title: "HEART RATE",
+        workouts: Math.floor(oneMonthSeries.avgHR / twoMonthSeries.length),
+        className:
+          oneMonthSeries.avgHR - twoMonthSeries.avgHR > 0
+            ? "percentage positive"
+            : "percentage negative",
+        icon: <MonitorHeartIcon className="icon" />,
+        change:
+          Math.abs(
+            (oneMonthSeries.avgHR - twoMonthSeries.avgHR) / twoMonthSeries.avgHR
+          ) * 100,
+      };
       break;
     default:
       break;
@@ -29,15 +129,19 @@ const Widget = ({ type }) => {
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">11111</span>
+        <span className="title">{widgetCard.title}</span>
+        <span className="counter">{widgetCard.workouts}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpOutlinedIcon />
-          10%
+        <div className={widgetCard.className}>
+          {widgetCard.className === "percentage positive" ? (
+            <KeyboardArrowUpOutlinedIcon />
+          ) : (
+            <KeyboardArrowDownOutlinedIcon />
+          )}
+          {widgetCard.change}%
         </div>
-        <div className="icons">{data.icon}</div>
+        <div className="icons">{widgetCard.icon}</div>
       </div>
     </div>
   );
