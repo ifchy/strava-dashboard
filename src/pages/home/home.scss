@@ -3,8 +3,15 @@
   .home-container {
     flex: 6;
 
-    .widgets,
-    .charts {
+    .widgetContainer {
+      .titleBlock {
+        padding-left: 25px;
+        padding-top: 20px;
+        color: gray;
+      }
+    }
+    .charts,
+    .widgets {
       display: flex;
       padding: 20px;
       gap: 20px;

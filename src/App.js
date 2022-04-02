@@ -24,7 +24,7 @@ function App() {
             <Route path="test" element={<FetchData />} />
             <Route path="users">
               <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
+              <Route path=":activityId" element={<Single />} />
               <Route path="new" element={<New />} />
             </Route>
           </Route>

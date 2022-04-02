@@ -5,8 +5,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PeopleIcon from "@mui/icons-material/People";
 import RouteIcon from "@mui/icons-material/Route";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <div className="top">
@@ -16,7 +18,7 @@ const SideBar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-            <DashboardIcon className="icon" />
+            <DashboardIcon className="icon" onClick={() => navigate("/")} />
             <span>Dashboard</span>
           </li>
           <p className="title">LISTS</p>

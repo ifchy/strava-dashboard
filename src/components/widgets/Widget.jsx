@@ -8,6 +8,7 @@ import StraightenIcon from "@mui/icons-material/Straighten";
 import { getStravaData, allData } from "../../features/stravaData";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import { red } from "@mui/material/colors";
 
 const Widget = ({ type }) => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const Widget = ({ type }) => {
   let widgetCard;
 
   switch (type) {
-    case "user":
+    case "workouts":
       widgetCard = {
         title: "WORKOUTS",
         workouts: oneMonthData.length,
@@ -66,14 +67,22 @@ const Widget = ({ type }) => {
           oneMonthData.length - twoMonthData.length > 0
             ? "percentage positive"
             : "percentage negative",
-        icon: <DirectionsRunIcon className="icon" />,
+        icon: (
+          <DirectionsRunIcon
+            className="icon"
+            style={{
+              color: "rgba(0, 133, 0, 1)",
+              backgroundColor: "rgba(0, 133, 0, 0.25)",
+            }}
+          />
+        ),
         change:
           Math.abs(
             (oneMonthData.length - twoMonthData.length) / twoMonthData.length
           ) * 100,
       };
       break;
-    case "order":
+    case "time":
       widgetCard = {
         title: "TIME",
         workouts: moment
@@ -83,7 +92,15 @@ const Widget = ({ type }) => {
           oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime > 0
             ? "percentage positive"
             : "percentage negative",
-        icon: <TimerIcon className="icon" />,
+        icon: (
+          <TimerIcon
+            className="icon"
+            style={{
+              color: "rgb(218, 165, 32)",
+              backgroundColor: "rgba(218, 165, 32, 0.25)",
+            }}
+          />
+        ),
         change:
           Math.abs(
             (oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime) /
@@ -91,7 +108,7 @@ const Widget = ({ type }) => {
           ) * 100,
       };
       break;
-    case "earnings":
+    case "distance":
       widgetCard = {
         title: "DISTANCE",
         workouts: oneMonthSeries.distance,
@@ -99,7 +116,15 @@ const Widget = ({ type }) => {
           oneMonthSeries.distance - twoMonthSeries.distance > 0
             ? "percentage positive"
             : "percentage negative",
-        icon: <StraightenIcon className="icon" />,
+        icon: (
+          <StraightenIcon
+            className="icon"
+            style={{
+              color: "rgba(0, 0, 200, 1)",
+              backgroundColor: "rgba(0, 0, 200, 0.25)",
+            }}
+          />
+        ),
         change:
           Math.abs(
             (oneMonthSeries.distance - twoMonthSeries.distance) /
@@ -107,7 +132,7 @@ const Widget = ({ type }) => {
           ) * 100,
       };
       break;
-    case "balance":
+    case "heartrate":
       widgetCard = {
         title: "HEART RATE",
         workouts: Math.floor(oneMonthSeries.avgHR / twoMonthSeries.length),
@@ -115,7 +140,15 @@ const Widget = ({ type }) => {
           oneMonthSeries.avgHR - twoMonthSeries.avgHR > 0
             ? "percentage positive"
             : "percentage negative",
-        icon: <MonitorHeartIcon className="icon" />,
+        icon: (
+          <MonitorHeartIcon
+            className="icon"
+            style={{
+              color: "crimson",
+              backgroundColor: "rgba(255, 0, 0, 0.25)",
+            }}
+          />
+        ),
         change:
           Math.abs(
             (oneMonthSeries.avgHR - twoMonthSeries.avgHR) / twoMonthSeries.avgHR

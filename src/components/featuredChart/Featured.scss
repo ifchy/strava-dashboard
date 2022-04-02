@@ -13,6 +13,8 @@
     .title {
       font-size: 16px;
       font-weight: 500;
+      text-align: center;
+      width: 100%;
     }
   }
 
@@ -23,6 +25,14 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+
+    .heatCal {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
 
     .featuredChart {
       width: 100px;

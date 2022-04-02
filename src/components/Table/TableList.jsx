@@ -10,12 +10,13 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { getStravaData, allData } from "../../features/stravaData";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const TableList = () => {
   const dispatch = useDispatch();
   const dataStatus = useSelector((state) => state.data.status);
   const { data } = useSelector(allData);
-
+  const navigate = useNavigate();
   const rendered = data.map((ride, index) => {
     const {
       name,
@@ -71,6 +72,9 @@ const TableList = () => {
                   className="tableRow"
                   key={index}
                   id={row.id}
+                  onClick={() => {
+                    navigate(`/users/${row.id}`);
+                  }}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell className="tableCell">{row.name}</TableCell>

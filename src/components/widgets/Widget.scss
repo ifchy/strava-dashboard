@@ -19,22 +19,36 @@
       font-size: 14px;
       color: rgb(160, 160, 160);
     }
-
+    .counter {
+      font-size: 18px;
+      padding: 5px;
+      color: rgb(160, 160, 160);
+    }
     .percentage {
       display: flex;
       align-items: center;
       font-size: 14px;
+      border-radius: 5px;
+      padding: 2px;
 
       &.positive {
-        color: green;
+        color: rgb(0, 128, 0);
+        background-color: rgba(0, 128, 0, 0.25);
       }
       &.negative {
         color: red;
+        background-color: rgba(255, 0, 0, 0.25);
       }
     }
 
     .icons {
       align-self: flex-end;
+    }
+
+    .icon {
+      font-size: 18px;
+      padding: 5px;
+      border-radius: 5px;
     }
   }
 }

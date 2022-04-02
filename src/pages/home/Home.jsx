@@ -12,11 +12,14 @@ const Home = () => {
       <SideBar />
       <div className="home-container">
         <NavBar />
-        <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earnings" />
-          <Widget type="balance" />
+        <div className="widgetContainer">
+          <div className="titleBlock">This Month vs. Last Month</div>
+          <div className="widgets">
+            <Widget type="workouts" />
+            <Widget type="time" />
+            <Widget type="distance" />
+            <Widget type="heartrate" />
+          </div>
         </div>
         <div className="charts">
           <Featured />
