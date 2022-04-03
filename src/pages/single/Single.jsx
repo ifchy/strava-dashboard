@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Single = () => {
   const [data, setData] = useState();
@@ -21,7 +21,7 @@ const Single = () => {
 
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=645937f93b3c693e5500b4c09c42e4bb9c77af0a`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=e3cc0b553510042090ad3e794ebe677ceae620a6`
     );
     setData(res.data);
   };
@@ -65,7 +65,7 @@ const Single = () => {
       <div className="singleContainer">
         <NavBar />
         <div className="top">
-          <div className="title">Activity Overview</div>
+          <div className="title">ACTIVITY OVERVIEW</div>
         </div>
         <div className="bottom">
           <div className="left">
@@ -73,8 +73,8 @@ const Single = () => {
               <div className="activityName">{data && data.name}</div>
               <div className="date">
                 {data &&
-                  moment(data.start_date_local).format(
-                    "h:mm on dddd, MMMM, Do YYYY"
+                  moment(data.start_date).format(
+                    "h:mma on dddd, MMMM, Do YYYY"
                   )}
               </div>
             </div>

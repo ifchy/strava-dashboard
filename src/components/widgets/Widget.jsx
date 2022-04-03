@@ -21,7 +21,7 @@ const Widget = ({ type }) => {
     moment(ride.start_date).isAfter(oneMonthAgo)
   );
   const twoMonthData = data.filter((ride) =>
-    moment(ride.start_date).isAfter(twoMonthsAgo)
+    moment(ride.start_date).isBetween(twoMonthsAgo, oneMonthAgo)
   );
   const oneMonthSeries = oneMonthData.reduce(
     (prevTime, thisTime) => {
@@ -62,7 +62,8 @@ const Widget = ({ type }) => {
     case "workouts":
       widgetCard = {
         title: "WORKOUTS",
-        workouts: oneMonthData.length,
+        workouts:
+          oneMonthData.length === 0 ? "No Activities!" : oneMonthData.length,
         className:
           oneMonthData.length - twoMonthData.length > 0
             ? "percentage positive"
@@ -73,6 +74,7 @@ const Widget = ({ type }) => {
             style={{
               color: "rgba(0, 133, 0, 1)",
               backgroundColor: "rgba(0, 133, 0, 0.25)",
+              border: "1px solid rgba(0, 133, 0, 0.25)",
             }}
           />
         ),
@@ -85,9 +87,10 @@ const Widget = ({ type }) => {
     case "time":
       widgetCard = {
         title: "TIME",
-        workouts: moment
-          .utc(oneMonthSeries.elapsedTime * 1000)
-          .format("HH:mm:ss"),
+        workouts:
+          oneMonthSeries.elapsedTime === 0
+            ? "No Activities!"
+            : moment.utc(oneMonthSeries.elapsedTime * 1000).format("HH:mm:ss"),
         className:
           oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime > 0
             ? "percentage positive"
@@ -98,6 +101,7 @@ const Widget = ({ type }) => {
             style={{
               color: "rgb(218, 165, 32)",
               backgroundColor: "rgba(218, 165, 32, 0.25)",
+              border: "1px solid rgba(218, 165, 32, 0.25)",
             }}
           />
         ),
@@ -111,9 +115,12 @@ const Widget = ({ type }) => {
     case "distance":
       widgetCard = {
         title: "DISTANCE",
-        workouts: oneMonthSeries.distance,
+        workouts:
+          oneMonthSeries.distance === 0
+            ? "No Activities!"
+            : oneMonthSeries.distance,
         className:
-          oneMonthSeries.distance - twoMonthSeries.distance > 0
+          oneMonthSeries.distance - twoMonthSeries.distance >= 0
             ? "percentage positive"
             : "percentage negative",
         icon: (
@@ -122,20 +129,28 @@ const Widget = ({ type }) => {
             style={{
               color: "rgba(0, 0, 200, 1)",
               backgroundColor: "rgba(0, 0, 200, 0.25)",
+              border: "1px solid rgba(0, 0, 200, 0.25)",
             }}
           />
         ),
         change:
-          Math.abs(
-            (oneMonthSeries.distance - twoMonthSeries.distance) /
-              twoMonthSeries.distance
-          ) * 100,
+          isNaN(
+            Math.abs(
+              (oneMonthSeries.distance - twoMonthSeries.distance) /
+                twoMonthSeries.distance
+            )
+          ) && 0 * 100,
       };
       break;
     case "heartrate":
       widgetCard = {
         title: "HEART RATE",
-        workouts: Math.floor(oneMonthSeries.avgHR / twoMonthSeries.length),
+        workouts: isNaN(oneMonthSeries.avgHR / oneMonthData.length)
+          ? "No Activities!"
+          : Math.floor(
+              oneMonthSeries.avgHR / oneMonthData.length -
+                twoMonthSeries.avgHR / twoMonthData.length
+            ),
         className:
           oneMonthSeries.avgHR - twoMonthSeries.avgHR > 0
             ? "percentage positive"
@@ -146,6 +161,7 @@ const Widget = ({ type }) => {
             style={{
               color: "crimson",
               backgroundColor: "rgba(255, 0, 0, 0.25)",
+              border: "1px solid rgba(255, 0, 0, 0.25)",
             }}
           />
         ),

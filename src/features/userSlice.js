@@ -25,40 +25,38 @@ import moment from "moment";
 //   return access_token
 // }
 
-export const getStravaData = createAsyncThunk("data/getData", async () => {
-  const sixMonthsAgo = moment().subtract(6, "months").unix();
-  const today = moment().unix();
+export const getUserData = createAsyncThunk("data/getUserData", async () => {
   const res = await axios.get(
-    `https://www.strava.com/api/v3/athlete/activities?access_token=e3cc0b553510042090ad3e794ebe677ceae620a6&per_page=100&after=${sixMonthsAgo}&before=${today}`
+    `https://www.strava.com/api/v3/athletes/762309/stats?access_token=e3cc0b553510042090ad3e794ebe677ceae620a6`
   );
   return res.data;
 });
 
 const initialState = {
-  data: [],
+  user: [],
   status: "idle",
   error: null,
 };
 
-export const dataSlice = createSlice({
-  name: "stravaData",
+export const userSlice = createSlice({
+  name: "userData",
   initialState,
   reducers: {},
   extraReducers: {
-    [getStravaData.pending]: (state) => {
+    [getUserData.pending]: (state) => {
       state.status = "pending";
       state.error = false;
     },
-    [getStravaData.fulfilled]: (state, action) => {
+    [getUserData.fulfilled]: (state, action) => {
       state.status = "success";
-      state.data = action.payload;
+      state.user = action.payload;
     },
-    [getStravaData.rejected]: (state) => {
+    [getUserData.rejected]: (state) => {
       state.status = "error";
       state.error = true;
     },
   },
 });
 
-export default dataSlice.reducer;
-export const allData = (state) => state.data;
+export default userSlice.reducer;
+export const userData = (state) => state.user;

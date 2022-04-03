@@ -17,12 +17,12 @@ const SideBar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" onClick={() => navigate("/")} />
+          <li onClick={() => navigate("/")}>
+            <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          <p className="title">LISTS</p>
-          <li>
+          <p className="title">LINKS</p>
+          <li onClick={() => navigate("/athlete")}>
             <PersonIcon className="icon" />
             <span>Me</span>
           </li>

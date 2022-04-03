@@ -12,6 +12,7 @@ import List from "./pages/list/List";
 import New from "./pages/new/New";
 import Single from "./pages/single/Single";
 import FetchData from "./FetchData";
+import Me from "./pages/me/Me";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="athlete" element={<Me />} />
             <Route path="test" element={<FetchData />} />
             <Route path="users">
               <Route index element={<List />} />
