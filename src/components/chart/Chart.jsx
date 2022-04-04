@@ -19,12 +19,12 @@ const Chart = () => {
   const { data } = useSelector(allData);
   const [metric, setMetric] = useState("workouts");
 
-  const oneMonthAgo = moment().add(-1, "months");
-  const twoMonthAgo = moment().add(-2, "months");
-  const threeMonthAgo = moment().add(-3, "months");
-  const fourMonthAgo = moment().add(-4, "months");
-  const fiveMonthAgo = moment().add(-5, "months");
-  const sixMonthAgo = moment().add(-6, "months");
+  const oneMonthAgo = moment().startOf("month").add(-1, "months");
+  const twoMonthAgo = moment().startOf("month").add(-2, "months");
+  const threeMonthAgo = moment().startOf("month").add(-3, "months");
+  const fourMonthAgo = moment().startOf("month").add(-4, "months");
+  const fiveMonthAgo = moment().startOf("month").add(-5, "months");
+  const sixMonthAgo = moment().startOf("month").add(-6, "months");
   const sixMonthData = createRow(
     moment().subtract(6, "months").format("MMMM"),
     data.filter((ride) => moment(ride.start_date).isAfter(sixMonthAgo)).length,
@@ -180,11 +180,17 @@ const Chart = () => {
     createRow(
       moment().subtract(1, "months").format("MMMM"),
       data.filter((ride) =>
-        moment(ride.start_date).isBetween(oneMonthAgo, moment())
+        moment(ride.start_date).isBetween(
+          oneMonthAgo,
+          moment().startOf("month")
+        )
       ).length,
       data
         .filter((ride) =>
-          moment(ride.start_date).isBetween(oneMonthAgo, moment())
+          moment(ride.start_date).isBetween(
+            oneMonthAgo,
+            moment().startOf("month")
+          )
         )
         .reduce(
           (prevTime, thisTime) => {
@@ -203,10 +209,13 @@ const Chart = () => {
     ),
     createRow(
       moment().format("MMMM"),
-      data.filter((ride) => moment(ride.start_date).isAfter(oneMonthAgo))
-        .length,
+      data.filter((ride) =>
+        moment(ride.start_date).isAfter(moment().startOf("month"))
+      ).length,
       data
-        .filter((ride) => moment(ride.start_date).isAfter(oneMonthAgo))
+        .filter((ride) =>
+          moment(ride.start_date).isAfter(moment().startOf("month"))
+        )
         .reduce(
           (prevTime, thisTime) => {
             return {

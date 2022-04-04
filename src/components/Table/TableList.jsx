@@ -50,8 +50,6 @@ const TableList = () => {
     // getRides();
     if (dataStatus === "idle") {
       dispatch(getStravaData());
-      dispatch(getUserData());
-      dispatch(getProfileData());
     }
   }, []);
 
@@ -60,7 +58,7 @@ const TableList = () => {
       <TableContainer component={Paper} className="table">
         <Table sx={{ minWidth: 250 }} aria-label="simple table">
           <TableHead>
-            <TableRow className="tableRow">
+            <TableRow className="tableHeader">
               <TableCell className="tableCell">Workout Name</TableCell>
               <TableCell className="tableCell">Date</TableCell>
               <TableCell className="tableCell">Type</TableCell>

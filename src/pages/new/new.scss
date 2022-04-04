@@ -1,0 +1,53 @@
+.new {
+  width: 100%;
+  display: flex;
+  .newContainer {
+    flex: 6;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      width: 50%;
+
+      .top {
+        display: flex;
+        margin: 20px;
+        margin-bottom: 0;
+        padding: 20px;
+        -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(155, 155, 155, 0.47);
+        background-color: #7551f883;
+        font-size: 28px;
+
+        p {
+          margin: 0;
+        }
+      }
+      .bottom {
+        -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(155, 155, 155, 0.47);
+        display: flex;
+        padding: 10px;
+        margin: 20px;
+
+        .right {
+          width: 80%;
+          margin: auto;
+          text-align: center;
+
+          form {
+            width: 100%;
+            .inputs {
+              margin-left: auto;
+              width: 100%;
+            }
+          }
+          .save {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

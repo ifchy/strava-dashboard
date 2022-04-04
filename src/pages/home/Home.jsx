@@ -5,8 +5,11 @@ import NavBar from "../../components/navBar/NavBar";
 import SideBar from "../../components/sideBar/SideBar";
 import TableList from "../../components/Table/TableList";
 import Widget from "../../components/widgets/Widget";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import { useNavigate } from "react-router-dom";
 import "./home.scss";
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="home">
       <SideBar />
@@ -26,7 +29,16 @@ const Home = () => {
           <Chart />
         </div>
         <div className="listContainer">
-          <div className="listTitle">Past Workouts</div>
+          <div className="listTitle">
+            <span>Past Workouts</span>
+            <span for="addWorkout" className="addWorkout">
+              Add Workout
+              <AddBoxIcon
+                id="addWorkout"
+                onClick={() => navigate("/activities/new")}
+              />
+            </span>
+          </div>
           <TableList />
         </div>
       </div>

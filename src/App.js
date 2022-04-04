@@ -13,7 +13,6 @@ import New from "./pages/new/New";
 import Single from "./pages/single/Single";
 import FetchData from "./FetchData";
 import Me from "./pages/me/Me";
-
 function App() {
   return (
     <div className="App">
@@ -24,7 +23,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="athlete" element={<Me />} />
             <Route path="test" element={<FetchData />} />
-            <Route path="users">
+            <Route path="activities">
               <Route index element={<List />} />
               <Route path=":activityId" element={<Single />} />
               <Route path="new" element={<New />} />

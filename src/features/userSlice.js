@@ -27,7 +27,7 @@ import moment from "moment";
 
 export const getUserData = createAsyncThunk("data/getUserData", async () => {
   const res = await axios.get(
-    `https://www.strava.com/api/v3/athletes/762309/stats?access_token=e3cc0b553510042090ad3e794ebe677ceae620a6`
+    `https://www.strava.com/api/v3/athletes/762309/stats?access_token=cc6f7be7e41f015efd7e1ec9d56f0478c686823b`
   );
   return res.data;
 });

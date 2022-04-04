@@ -1,5 +1,15 @@
 .tableRow {
   &:hover {
     background-color: #7551f883;
+    cursor: pointer;
+  }
+}
+
+.tableHeader {
+  background-color: #7551f883;
+
+  .tableCell {
+    font-size: 16px;
+    font-weight: bold;
   }
 }

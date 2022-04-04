@@ -15,8 +15,8 @@ const Widget = ({ type }) => {
   const dataStatus = useSelector((state) => state.data.status);
   const { data } = useSelector(allData);
 
-  const oneMonthAgo = moment().add(-1, "months");
-  const twoMonthsAgo = moment().add(-2, "months");
+  const oneMonthAgo = moment().startOf("month");
+  const twoMonthsAgo = moment().startOf("month").add(-1, "months");
   const oneMonthData = data.filter((ride) =>
     moment(ride.start_date).isAfter(oneMonthAgo)
   );
@@ -88,7 +88,7 @@ const Widget = ({ type }) => {
       widgetCard = {
         title: "TIME",
         workouts:
-          oneMonthSeries.elapsedTime === 0
+          (oneMonthSeries.elapsedTime === 0) & (oneMonthData.length === 0)
             ? "No Activities!"
             : moment.utc(oneMonthSeries.elapsedTime * 1000).format("HH:mm:ss"),
         className:
@@ -145,12 +145,14 @@ const Widget = ({ type }) => {
     case "heartrate":
       widgetCard = {
         title: "HEART RATE",
-        workouts: isNaN(oneMonthSeries.avgHR / oneMonthData.length)
-          ? "No Activities!"
-          : Math.floor(
-              oneMonthSeries.avgHR / oneMonthData.length -
-                twoMonthSeries.avgHR / twoMonthData.length
-            ),
+        workouts:
+          isNaN(oneMonthSeries.avgHR / oneMonthData.length) &
+          (oneMonthData.length === 0)
+            ? "No Activities!"
+            : Math.floor(
+                oneMonthSeries.avgHR / oneMonthData.length -
+                  twoMonthSeries.avgHR / twoMonthData.length
+              ),
         className:
           oneMonthSeries.avgHR - twoMonthSeries.avgHR > 0
             ? "percentage positive"

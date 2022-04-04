@@ -2,34 +2,34 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import moment from "moment";
 
-// const getAccessToken = () => {
-//   const headers = {
-//     Accept: "application/json, text/plain, */*",
-//     "Content-Type": "application/json",
-//   };
+const getAccessToken = async (req, res) => {
+  const headers = {
+    Accept: "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+  };
 
-//   const body = JSON.stringify({
-//     client_id: process.env.STRAVA_CLIENT_ID,
-//     client_secret: process.env.STRAVA_SECRET,
-//     refresh_token: process.env.STRAVA_REFRESH_TOKEN,
-//     grant_type: "refresh_token",
-//   });
+  const body = JSON.stringify({
+    client_id: process.env.REACT_APP_STRAVA_CLIENT_ID,
+    client_secret: process.env.REACT_APP_STRAVA_SECRET,
+    refresh_token: process.env.REACT_APP_STRAVA_REFRESH_TOKEN,
+    grant_type: "refresh_token",
+  });
+  const reauthToken = await fetch("https://www.strava.com/oauth/token", {
+    method: "post",
+    headers,
+    body,
+  });
 
-//   const reauthToken = await fetch("https://www.strava.com/oauth/token", {
-//     method: "post",
-//     headers,
-//     body,
-//   });
-
-//   const { access_token } = await reauthToken.json()
-//   return access_token
-// }
-
+  const { access_token } = await reauthToken.json();
+  console.log(access_token);
+  return access_token;
+};
 export const getStravaData = createAsyncThunk("data/getData", async () => {
   const sixMonthsAgo = moment().subtract(6, "months").unix();
   const today = moment().unix();
+  // const token = await getAccessToken();
   const res = await axios.get(
-    `https://www.strava.com/api/v3/athlete/activities?access_token=e3cc0b553510042090ad3e794ebe677ceae620a6&per_page=100&after=${sixMonthsAgo}&before=${today}`
+    `https://www.strava.com/api/v3/athlete/activities?access_token=cc6f7be7e41f015efd7e1ec9d56f0478c686823b&per_page=100&after=${sixMonthsAgo}&before=${today}`
   );
   return res.data;
 });
@@ -43,7 +43,9 @@ const initialState = {
 export const dataSlice = createSlice({
   name: "stravaData",
   initialState,
-  reducers: {},
+  reducers: {
+    getRefreshToken: {},
+  },
   extraReducers: {
     [getStravaData.pending]: (state) => {
       state.status = "pending";
