@@ -23,13 +23,31 @@ const Featured = () => {
   });
 
   const months = {
-    today: moment().format("YYYY-MM-DD"),
-    oneMonthAgo: moment().add(-1, "months").format("YYYY-MM-DD"),
-    twoMonthAgo: moment().add(-2, "months").format("YYYY-MM-DD"),
-    threeMonthAgo: moment().add(-3, "months").format("YYYY-MM-DD"),
-    fourMonthAgo: moment().add(-4, "months").format("YYYY-MM-DD"),
-    fiveMonthAgo: moment().add(-5, "months").format("YYYY-MM-DD"),
-    sixMonthAgo: moment().add(-6, "months").format("YYYY-MM-DD"),
+    today: moment().startOf("month").format("YYYY-MM-DD"),
+    oneMonthAgo: moment()
+      .add(-1, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
+    twoMonthAgo: moment()
+      .add(-2, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
+    threeMonthAgo: moment()
+      .add(-3, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
+    fourMonthAgo: moment()
+      .add(-4, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
+    fiveMonthAgo: moment()
+      .add(-5, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
+    sixMonthAgo: moment()
+      .add(-6, "months")
+      .startOf("month")
+      .format("YYYY-MM-DD"),
   };
 
   const [metric, setMetric] = useState(months.today);
@@ -49,7 +67,7 @@ const Featured = () => {
         <div className="heatCal">
           <CalendarHeatmap
             startDate={metric}
-            endDate={moment(metric).add(1, "months")}
+            endDate={moment(metric).startOf("month").add(1, "months")}
             values={rendered}
             showWeekdayLabels={true}
             horizontal={false}
@@ -62,14 +80,26 @@ const Featured = () => {
         <div className="selectorMonth">
           <select value={metric} onChange={handleChange}>
             <option selected value={months.today}>
-              {months.today}
+              {moment(months.today, "YYYY-MM-DD").format("MMMM")}
             </option>
-            <option value={months.oneMonthAgo}>{months.oneMonthAgo}</option>
-            <option value={months.twoMonthAgo}>{months.twoMonthAgo}</option>
-            <option value={months.threeMonthAgo}>{months.threeMonthAgo}</option>
-            <option value={months.fourMonthAgo}>{months.fourMonthAgo}</option>
-            <option value={months.fiveMonthAgo}>{months.fiveMonthAgo}</option>
-            <option value={months.sixMonthAgo}>{months.sixMonthAgo}</option>
+            <option value={months.oneMonthAgo}>
+              {moment(months.oneMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
+            <option value={months.twoMonthAgo}>
+              {moment(months.twoMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
+            <option value={months.threeMonthAgo}>
+              {moment(months.threeMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
+            <option value={months.fourMonthAgo}>
+              {moment(months.fourMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
+            <option value={months.fiveMonthAgo}>
+              {moment(months.fiveMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
+            <option value={months.sixMonthAgo}>
+              {moment(months.sixMonthAgo, "YYYY-MM-DD").format("MMMM")}
+            </option>
           </select>
         </div>
       </div>

@@ -13,9 +13,15 @@ import New from "./pages/new/New";
 import Single from "./pages/single/Single";
 import FetchData from "./FetchData";
 import Me from "./pages/me/Me";
+import "./theme/dark.scss";
+import { useContext } from "react";
+import { DarkModeContext } from "./features/context/darkReducer";
+
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <div className="App">
+    <div className={darkMode ? "app dark" : "app"}>
       <Router>
         <Routes>
           <Route path="/">

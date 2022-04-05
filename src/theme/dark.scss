@@ -1,0 +1,199 @@
+.app.dark {
+  background-color: #121212;
+  color: #ffffff;
+
+  .sidebar {
+    .center {
+      li {
+        background: linear-gradient(to left, #121212 50%, #3700b3 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all 0.25s ease-out;
+        &:hover {
+          background-position: left bottom;
+        }
+      }
+    }
+    .title {
+      color: #ffffff;
+    }
+    .logo {
+      color: #bb86fc;
+    }
+    .icon {
+      color: #bb86fc;
+    }
+    .colorOptions {
+      border: 1px solid #bb86fc77;
+    }
+  }
+
+  .listContainer {
+    .listTitle {
+      color: #ffffff;
+
+      :nth-child(2) {
+        background-color: #3700b3;
+        background: linear-gradient(to left, #202020 50%, #3700b3 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all 0.25s ease-out;
+        &:hover {
+          background-position: left bottom;
+        }
+
+        #addWorkout {
+          color: #ffffff;
+        }
+      }
+    }
+    .tableHeader {
+      background-color: #3700b3;
+      .tableCell {
+        color: #ffffff;
+      }
+    }
+    .tableRow {
+      background-color: #121212;
+      background-size: 100% 200%;
+      background-image: linear-gradient(to bottom, #121212 50%, #3700b3 50%);
+      -webkit-transition: background-position 0.25s;
+      -moz-transition: background-position 0.25s;
+      transition: background-position 0.25s;
+
+      &:hover {
+        background-position: 0 -100%;
+      }
+      .tableCell {
+        color: #ffffff;
+      }
+    }
+  }
+  .widgetContainer {
+    .titleBlock {
+      color: #ffffff;
+    }
+    .widgets {
+      .widget {
+        .title,
+        .counter {
+          color: #ffffff;
+        }
+        .right {
+          .icons {
+            color: #bb86fc;
+          }
+        }
+      }
+    }
+  }
+
+  .chart {
+    color: #ffffff;
+
+    select {
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+    }
+    .chartGrid {
+      stroke: #ffffff7c;
+    }
+  }
+
+  .featured {
+    .title {
+      color: #ffffff;
+    }
+
+    .selectorMonth {
+      border: 1px solid #ffffff;
+
+      select {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .meContainer {
+    .top {
+      background-color: #bb86fc;
+      color: #121212;
+    }
+
+    .bottom {
+      .bottom-right {
+        .tableHead {
+          background-color: #bb86fc;
+        }
+        .icon {
+          color: #121212;
+          background-color: #bb86fc;
+        }
+        .tableRow {
+          background-color: #121212;
+          .tableCell {
+            color: #ffffff;
+          }
+        }
+      }
+
+      .bottom-left {
+        .location {
+          color: #bb86fc;
+          .icon {
+            color: #bb86fc;
+          }
+        }
+      }
+    }
+  }
+
+  .singleContainer {
+    .top {
+      background-color: #bb86fc;
+      color: #121212;
+    }
+
+    .bottom {
+      .left {
+        .left-top {
+          color: #ffffff;
+        }
+      }
+
+      .right {
+        .right-top {
+          color: #ffffff;
+        }
+
+        .right-bottom {
+          .tableHead {
+            .tableCell {
+              color: #121212;
+              background-color: #bb86fc;
+            }
+          }
+          .tableCell {
+            color: #ffffff;
+            background-color: #121212;
+          }
+        }
+      }
+    }
+  }
+
+  .newContainer {
+    .content {
+      .top {
+        background-color: #bb86fc;
+        color: #121212;
+      }
+    }
+    .bottom {
+      .form {
+        color: #ffffff;
+      }
+    }
+  }
+}

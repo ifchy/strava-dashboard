@@ -101,6 +101,14 @@
           -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.47);
           box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
           padding: 10px;
+
+          .tableHead {
+            color: #121212;
+            background-color: #7551f883;
+            .tableCell {
+              font-size: 20px;
+            }
+          }
           .table {
             &:hover {
               background-color: #7551f883;

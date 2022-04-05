@@ -6,7 +6,18 @@
   color: gray;
 
   .title {
-    margin-bottom: 20px;
+    span {
+      margin-left: 10px;
+      border: 1px solid #7551f883;
+      border-radius: 5px;
+      select {
+        color: gray;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
   }
 
   .chartGrid {

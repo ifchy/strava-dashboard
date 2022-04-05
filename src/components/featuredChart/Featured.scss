@@ -40,5 +40,18 @@
       text-align: center;
       margin: 0;
     }
+
+    .selectorMonth {
+      border: 1px solid #7551f883;
+      border-radius: 5px;
+
+      select {
+        color: gray;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
   }
 }

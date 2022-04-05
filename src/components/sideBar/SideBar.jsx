@@ -6,9 +6,13 @@ import PeopleIcon from "@mui/icons-material/People";
 import RouteIcon from "@mui/icons-material/Route";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "../../features/context/darkReducer";
 
 const SideBar = () => {
   const navigate = useNavigate();
+  const { dispatch } = useContext(DarkModeContext);
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -48,8 +52,14 @@ const SideBar = () => {
       <div className="bottom">
         <p className="title">THEME</p>
         <div className="picker">
-          <div className="colorOptions"></div>
-          <div className="colorOptions"></div>
+          <div
+            className="colorOptions"
+            onClick={() => dispatch({ type: "LIGHT" })}
+          ></div>
+          <div
+            className="colorOptions"
+            onClick={() => dispatch({ type: "DARK" })}
+          ></div>
         </div>
       </div>
     </div>

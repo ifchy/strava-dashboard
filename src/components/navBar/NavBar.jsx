@@ -11,13 +11,12 @@ const NavBar = () => {
           <input type="text" placeholder="Search..." />
         </div>
         <div className="items">
-          <div className="item">
+          <div className="toggle">
             <DarkModeOutlinedIcon className="icon" />
             <LightModeOutlinedIcon className="icon" />
           </div>
           <div className="item">
             <Avatar className="avatar">M</Avatar>
-            {/* <img src="" alt="" className="avatar" /> */}
           </div>
         </div>
       </div>

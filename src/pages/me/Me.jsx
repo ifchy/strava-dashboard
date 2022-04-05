@@ -114,8 +114,12 @@ const Me = () => {
                   aria-label="a dense table"
                 >
                   <TableHead>
-                    <TableRow>
-                      <TableCell align="center" colSpan={3}>
+                    <TableRow className="tableRow">
+                      <TableCell
+                        align="center"
+                        colSpan={3}
+                        className="tableCell"
+                      >
                         <DirectionsBikeIcon className="icon" />
                       </TableCell>
                     </TableRow>
@@ -137,11 +141,18 @@ const Me = () => {
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
+                          className="tableRow"
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="tableCell"
+                          >
                             {row.name}
                           </TableCell>
-                          <TableCell align="left">{row.metric}</TableCell>
+                          <TableCell align="left" className="tableCell">
+                            {row.metric}
+                          </TableCell>
                         </TableRow>
                       ))}
                     <TableRow className="tableHead">
@@ -160,11 +171,18 @@ const Me = () => {
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
+                          className="tableRow"
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="tableCell"
+                          >
                             {row.name}
                           </TableCell>
-                          <TableCell align="left">{row.metric}</TableCell>
+                          <TableCell align="left" className="tableCell">
+                            {row.metric}
+                          </TableCell>
                         </TableRow>
                       ))}
                   </TableBody>

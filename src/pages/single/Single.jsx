@@ -21,7 +21,7 @@ const Single = () => {
 
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=cc6f7be7e41f015efd7e1ec9d56f0478c686823b`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=86602a2f9286057b4bf1f418d6b19e8870a5a081`
     );
     setData(res.data);
   };
@@ -40,8 +40,12 @@ const Single = () => {
         ),
         createData(
           "Heart Rate",
-          `${Math.floor(data.average_heartrate)} BPM`,
-          `${Math.floor(data.average_heartrate)} BPM`
+          !data.max_heartrate
+            ? "Not Available"
+            : Math.floor(data.average) + "BPM",
+          !data.max_heartrate
+            ? "Not Available"
+            : Math.floor(data.max_heartrate) + "BPM"
         ),
         createData("Calories", data.calories, ""),
         createData(
@@ -101,10 +105,14 @@ const Single = () => {
                   aria-label="simple table"
                 >
                   <TableHead>
-                    <TableRow className="table">
-                      <TableCell></TableCell>
-                      <TableCell align="left">Avg</TableCell>
-                      <TableCell align="left">Max</TableCell>
+                    <TableRow className="tableHead">
+                      <TableCell className="tableCell"></TableCell>
+                      <TableCell align="left" className="tableCell">
+                        Avg
+                      </TableCell>
+                      <TableCell align="left" className="tableCell">
+                        Max
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -117,11 +125,19 @@ const Single = () => {
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="tableCell"
+                          >
                             {row.name}
                           </TableCell>
-                          <TableCell align="left">{row.avg}</TableCell>
-                          <TableCell align="left">{row.max}</TableCell>
+                          <TableCell align="left" className="tableCell">
+                            {row.avg}
+                          </TableCell>
+                          <TableCell align="left" className="tableCell">
+                            {row.max}
+                          </TableCell>
                         </TableRow>
                       ))}
                   </TableBody>

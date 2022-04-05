@@ -12,12 +12,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useContext } from "react";
+import { DarkModeContext } from "../../features/context/darkReducer";
 
 const Chart = () => {
-  const dispatch = useDispatch();
-  const dataStatus = useSelector((state) => state.data.status);
+  const { darkMode } = useContext(DarkModeContext);
   const { data } = useSelector(allData);
-  const [metric, setMetric] = useState("workouts");
+  const [metric, setMetric] = useState("Workouts");
 
   const oneMonthAgo = moment().startOf("month").add(-1, "months");
   const twoMonthAgo = moment().startOf("month").add(-2, "months");
@@ -49,9 +50,9 @@ const Chart = () => {
   function createRow(month, total, reducedData) {
     return {
       name: month,
-      workouts: total,
-      "elapsed time": Math.floor(reducedData.elapsedTime / 60),
-      distance: (Math.round(reducedData.distance * 0.062137) / 100).toFixed(2),
+      Workouts: total,
+      "Elapsed time": Math.floor(reducedData.elapsedTime / 60),
+      Distance: (Math.round(reducedData.distance * 0.062137) / 100).toFixed(2),
       average_heartrate: reducedData.avgHR,
     };
   }
@@ -232,17 +233,15 @@ const Chart = () => {
         )
     ),
   ];
-  console.log(dataArray);
   const handleChange = (e) => {
     setMetric(e.target.value);
-    console.log(metric);
   };
   let ending;
   switch (metric) {
-    case "distance":
+    case "Distance":
       ending = "miles";
       break;
-    case "elapsed time":
+    case "Elapsed time":
       ending = "minutes";
       break;
   }
@@ -250,15 +249,16 @@ const Chart = () => {
     <div className="chart">
       <div className="title">
         Last 6 months- Total {metric}: {sixMonthData[metric]} {ending}
+        <span className="title">
+          <select value={metric} onChange={handleChange}>
+            <option value={"Workouts"}>Workouts</option>
+            <option value={"Elapsed time"}>Elapsed Time</option>
+            <option value={"Distance"}>Distance</option>
+            <option value={"Average_heartrate"}>Average Heart Rate</option>
+          </select>
+        </span>
       </div>
-      <div className="title">
-        <select value={metric} onChange={handleChange}>
-          <option value={"workouts"}>Workouts</option>
-          <option value={"elapsed time"}>Elapsed Time</option>
-          <option value={"distance"}>Distance</option>
-          <option value={"average_heartrate"}>Average Heart Rate</option>
-        </select>
-      </div>
+
       <ResponsiveContainer width="100%" aspect={2 / 1}>
         <AreaChart
           width={730}
@@ -268,20 +268,37 @@ const Chart = () => {
         >
           <defs>
             <linearGradient id={metric} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor={darkMode ? "#bb86fc" : "#8884d8"}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor={darkMode ? "#bb86fc" : "#8884d8"}
+                stopOpacity={0.2}
+              />
             </linearGradient>
           </defs>
-          <XAxis dataKey="name" stroke="gray" />
-          <YAxis dataKey={metric} stroke="gray" />
+          <XAxis
+            dataKey="name"
+            stroke={darkMode ? "#ffffff" : "gray"}
+            className="xAxis"
+          />
+          <YAxis
+            dataKey={metric}
+            stroke={darkMode ? "#ffffff" : "gray"}
+            className="yAxis"
+          />
           <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
           <Tooltip />
           <Area
+            className="areaChart"
             type="monotone"
             dataKey={metric}
-            stroke="#8884d8"
-            fillOpacity={0.45}
-            fill="#8884d8"
+            stroke={darkMode ? `#3700b3` : `url(#${metric})`}
+            fillOpacity={1}
+            fill={`url(#${metric})`}
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -75,7 +75,7 @@ const TableList = () => {
                   key={index}
                   id={row.id}
                   onClick={() => {
-                    navigate(`/users/${row.id}`);
+                    navigate(`/activities/${row.id}`);
                   }}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >

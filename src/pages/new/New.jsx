@@ -9,8 +9,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import moment from "moment";
+import { useContext } from "react";
+import { DarkModeContext } from "../../features/context/darkReducer";
 
 const New = () => {
+  const { darkMode } = useContext(DarkModeContext);
+
   const [formContents, setFormContents] = useState({
     name: "",
     type: "",
@@ -40,7 +44,7 @@ const New = () => {
     // console.log(submit);
     axios
       .post(
-        "https://www.strava.com/api/v3/activities?access_token=cc6f7be7e41f015efd7e1ec9d56f0478c686823b",
+        "https://www.strava.com/api/v3/activities?access_token=86602a2f9286057b4bf1f418d6b19e8870a5a081",
         submit
       )
       .then((response) => console.log(response));
@@ -66,6 +70,7 @@ const New = () => {
     };
     return formmatted;
   };
+
   return (
     <div className="new">
       <SideBar />
@@ -80,6 +85,7 @@ const New = () => {
               <Box
                 component="form"
                 sx={{
+                  multilineColor: darkMode ? "#ffffff" : "red",
                   "& .MuiTextField-root": { m: 1, width: "100%" },
                 }}
                 noValidate
@@ -92,6 +98,17 @@ const New = () => {
                     id="name"
                     onChange={handleChange}
                     label="Activity Name"
+                    className="form"
+                    sx={{
+                      "& label.Mui-focused": {
+                        color: "green",
+                      },
+                      "& .MuiOutlinedInput-root": {
+                        "&.Mui-focused fieldset": {
+                          borderColor: "green",
+                        },
+                      },
+                    }}
                   />
                   <TextField
                     name="type"

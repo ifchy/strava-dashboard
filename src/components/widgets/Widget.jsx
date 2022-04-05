@@ -118,7 +118,7 @@ const Widget = ({ type }) => {
         workouts:
           oneMonthSeries.distance === 0
             ? "No Activities!"
-            : oneMonthSeries.distance,
+            : Math.floor(oneMonthSeries.distance * 0.00062137),
         className:
           oneMonthSeries.distance - twoMonthSeries.distance >= 0
             ? "percentage positive"
@@ -134,25 +134,24 @@ const Widget = ({ type }) => {
           />
         ),
         change:
-          isNaN(
-            Math.abs(
-              (oneMonthSeries.distance - twoMonthSeries.distance) /
-                twoMonthSeries.distance
-            )
-          ) && 0 * 100,
+          Math.abs(
+            (oneMonthSeries.distance - twoMonthSeries.distance) /
+              twoMonthSeries.distance
+          ) * 100,
       };
       break;
     case "heartrate":
       widgetCard = {
         title: "HEART RATE",
         workouts:
-          isNaN(oneMonthSeries.avgHR / oneMonthData.length) &
-          (oneMonthData.length === 0)
+          oneMonthData.length === 0
             ? "No Activities!"
-            : Math.floor(
-                oneMonthSeries.avgHR / oneMonthData.length -
-                  twoMonthSeries.avgHR / twoMonthData.length
-              ),
+            : isNaN(
+                Math.floor(
+                  oneMonthSeries.avgHR / oneMonthData.length -
+                    twoMonthSeries.avgHR / twoMonthData.length
+                )
+              ) && "Not Available",
         className:
           oneMonthSeries.avgHR - twoMonthSeries.avgHR > 0
             ? "percentage positive"
@@ -167,10 +166,12 @@ const Widget = ({ type }) => {
             }}
           />
         ),
-        change:
-          Math.abs(
-            (oneMonthSeries.avgHR - twoMonthSeries.avgHR) / twoMonthSeries.avgHR
-          ) * 100,
+        change: oneMonthSeries.avgHR
+          ? Math.abs(
+              (oneMonthSeries.avgHR - twoMonthSeries.avgHR) /
+                twoMonthSeries.avgHR
+            ) * 100
+          : "",
       };
       break;
     default:
