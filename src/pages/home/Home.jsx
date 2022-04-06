@@ -31,7 +31,7 @@ const Home = () => {
         <div className="listContainer">
           <div className="listTitle">
             <span>Past Workouts</span>
-            <span for="addWorkout" className="addWorkout">
+            <span htmlFor="addWorkout" className="addWorkout">
               Add Workout
               <AddBoxIcon
                 id="addWorkout"

@@ -51,7 +51,7 @@ const Chart = () => {
     return {
       name: month,
       Workouts: total,
-      "Elapsed time": Math.floor(reducedData.elapsedTime / 60),
+      "Elapsed Time": Math.floor(reducedData.elapsedTime / 60),
       Distance: (Math.round(reducedData.distance * 0.062137) / 100).toFixed(2),
       average_heartrate: reducedData.avgHR,
     };
@@ -252,7 +252,7 @@ const Chart = () => {
         <span className="title">
           <select value={metric} onChange={handleChange}>
             <option value={"Workouts"}>Workouts</option>
-            <option value={"Elapsed time"}>Elapsed Time</option>
+            <option value={"Elapsed Time"}>Elapsed Time</option>
             <option value={"Distance"}>Distance</option>
             <option value={"Average_heartrate"}>Average Heart Rate</option>
           </select>
@@ -296,9 +296,9 @@ const Chart = () => {
             className="areaChart"
             type="monotone"
             dataKey={metric}
-            stroke={darkMode ? `#3700b3` : `url(#${metric})`}
-            fillOpacity={1}
-            fill={`url(#${metric})`}
+            stroke={darkMode ? `#3700b3` : "#8884d8"}
+            fillOpacity={0.65}
+            fill={darkMode ? `#bb86fc` : "#8884d8"}
           />
         </AreaChart>
       </ResponsiveContainer>

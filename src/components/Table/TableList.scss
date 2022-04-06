@@ -1,6 +1,12 @@
 .tableRow {
+  background-size: 100% 200%;
+  background-image: linear-gradient(to bottom, #ffffff 50%, #7551f883 50%);
+  -webkit-transition: background-position 0.25s;
+  -moz-transition: background-position 0.25s;
+  transition: background-position 0.25s;
+
   &:hover {
-    background-color: #7551f883;
+    background-position: 0 -100%;
     cursor: pointer;
   }
 }

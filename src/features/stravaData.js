@@ -28,7 +28,7 @@ export const getStravaData = createAsyncThunk("data/getData", async () => {
   const today = moment().unix();
   // const token = await getAccessToken();
   const res = await axios.get(
-    `https://www.strava.com/api/v3/athlete/activities?access_token=86602a2f9286057b4bf1f418d6b19e8870a5a081&per_page=100&after=${sixMonthsAgo}&before=${today}`
+    `https://www.strava.com/api/v3/athlete/activities?access_token=fceeaa95d3d29938a39c6abf6912ec93be624d75&per_page=100&after=${sixMonthsAgo}&before=${today}`
   );
   return res.data;
 });

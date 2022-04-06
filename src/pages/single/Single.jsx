@@ -21,7 +21,7 @@ const Single = () => {
 
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=86602a2f9286057b4bf1f418d6b19e8870a5a081`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=fceeaa95d3d29938a39c6abf6912ec93be624d75`
     );
     setData(res.data);
   };
@@ -35,14 +35,14 @@ const Single = () => {
       const createRows = [
         createData(
           "Speed",
-          `${data.average_speed} MPH`,
-          `${data.max_speed} MPH`
+          `${Math.floor(data.average_speed * 2.23694)} MPH`,
+          `${Math.floor(data.max_speed * 2.23694)} MPH`
         ),
         createData(
           "Heart Rate",
-          !data.max_heartrate
+          !data.average_heartrate
             ? "Not Available"
-            : Math.floor(data.average) + "BPM",
+            : Math.floor(data.average_heartrate) + "BPM",
           !data.max_heartrate
             ? "Not Available"
             : Math.floor(data.max_heartrate) + "BPM"

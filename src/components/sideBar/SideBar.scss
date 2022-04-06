@@ -37,9 +37,13 @@
         align-items: center;
         padding: 5px;
         cursor: pointer;
+        background: linear-gradient(to left, #ffffff 50%, #ece8ff 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all 0.25s ease-out;
 
         &:hover {
-          background-color: #ece8ff;
+          background-position: left bottom;
         }
 
         .icon {

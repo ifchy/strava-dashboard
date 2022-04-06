@@ -11,8 +11,6 @@ import moment from "moment";
 import { red } from "@mui/material/colors";
 
 const Widget = ({ type }) => {
-  const dispatch = useDispatch();
-  const dataStatus = useSelector((state) => state.data.status);
   const { data } = useSelector(allData);
 
   const oneMonthAgo = moment().startOf("month");
@@ -135,8 +133,11 @@ const Widget = ({ type }) => {
         ),
         change:
           Math.abs(
-            (oneMonthSeries.distance - twoMonthSeries.distance) /
-              twoMonthSeries.distance
+            Math.round(
+              (oneMonthSeries.distance * 0.00062137 -
+                twoMonthSeries.distance * 0.00062137) /
+                (twoMonthSeries.distance * 0.00062137)
+            )
           ) * 100,
       };
       break;

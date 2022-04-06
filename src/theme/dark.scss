@@ -1,7 +1,10 @@
 .app.dark {
   background-color: #121212;
   color: #ffffff;
-
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   .sidebar {
     .center {
       li {
@@ -190,10 +193,16 @@
         color: #121212;
       }
     }
-    .bottom {
-      .form {
-        color: #ffffff;
-      }
+  }
+  .formText {
+    border: 1px solid #ffffff;
+    &:hover {
+      border: none;
+    }
+  }
+  .inputs {
+    label {
+      color: #ffffff;
     }
   }
 }

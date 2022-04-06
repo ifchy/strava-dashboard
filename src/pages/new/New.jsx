@@ -7,10 +7,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import axios from "axios";
 import moment from "moment";
 import { useContext } from "react";
 import { DarkModeContext } from "../../features/context/darkReducer";
+import { types } from "./activityTypes";
 
 const New = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -24,14 +30,23 @@ const New = () => {
     distance: "",
     trainer: "",
   });
-
+  const [valid, setValid] = useState(true);
   const handleChange = (event) => {
+    setValid(false);
     const name = event.target.name;
     const value = event.target.value;
+    validate(name, value) && setValid(true);
     setFormContents({
       ...formContents,
       [name]: value,
     });
+  };
+
+  const validate = (name, value) => {
+    if (name == "start_date_local") {
+      const result = moment(value, "MM/DD/YYYY", true).isValid();
+      return result;
+    }
   };
 
   const handleChecked = (event) => {
@@ -44,7 +59,7 @@ const New = () => {
     // console.log(submit);
     axios
       .post(
-        "https://www.strava.com/api/v3/activities?access_token=86602a2f9286057b4bf1f418d6b19e8870a5a081",
+        "https://www.strava.com/api/v3/activities?access_token=fceeaa95d3d29938a39c6abf6912ec93be624d75",
         submit
       )
       .then((response) => console.log(response));
@@ -70,7 +85,9 @@ const New = () => {
     };
     return formmatted;
   };
-
+  const activities = types.map((type) => {
+    return <MenuItem value={type}>{type}</MenuItem>;
+  });
   return (
     <div className="new">
       <SideBar />
@@ -98,18 +115,20 @@ const New = () => {
                     id="name"
                     onChange={handleChange}
                     label="Activity Name"
-                    className="form"
-                    sx={{
-                      "& label.Mui-focused": {
-                        color: "green",
-                      },
-                      "& .MuiOutlinedInput-root": {
-                        "&.Mui-focused fieldset": {
-                          borderColor: "green",
-                        },
-                      },
-                    }}
+                    className="formText"
                   />
+                  <FormControl fullWidth sx={{ m: 1, width: "100%" }}>
+                    <InputLabel id="typeLabel">Activity Type</InputLabel>
+                    <Select
+                      labelId="typeLabel"
+                      name="type"
+                      value={formContents.type}
+                      label="Activty Type"
+                      onChange={handleChange}
+                    >
+                      {activities}
+                    </Select>
+                  </FormControl>
                   <TextField
                     name="type"
                     id="type"
@@ -117,6 +136,7 @@ const New = () => {
                     label="Activity Type"
                   />
                   <TextField
+                    error={valid ? "" : "error"}
                     name="start_date_local"
                     id="start_date_local"
                     onChange={handleChange}
@@ -138,7 +158,7 @@ const New = () => {
                     name="distance"
                     id="distance"
                     onChange={handleChange}
-                    label="Distance"
+                    label="Distance (Miles)"
                   />
                   <div className="save">
                     <FormControlLabel

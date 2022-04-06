@@ -79,7 +79,7 @@ const Featured = () => {
         </div>
         <div className="selectorMonth">
           <select value={metric} onChange={handleChange}>
-            <option selected value={months.today}>
+            <option value={months.today}>
               {moment(months.today, "YYYY-MM-DD").format("MMMM")}
             </option>
             <option value={months.oneMonthAgo}>
