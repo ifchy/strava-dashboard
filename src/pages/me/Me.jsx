@@ -29,6 +29,7 @@ const Me = () => {
   const { profile } = useSelector(profileData);
   const dispatch = useDispatch();
   const dataStatus = useSelector((state) => state.user.status);
+  const profileStatus = useSelector((state) => state.profile.status);
 
   function createData(name, metric) {
     return { name, metric };
@@ -45,7 +46,7 @@ const Me = () => {
   }, []);
 
   useEffect(() => {
-    if (user) {
+    if (dataStatus === "success") {
       const rows = [
         createData(
           "Distance",
@@ -82,28 +83,40 @@ const Me = () => {
         ),
       ];
       setAllTime(allTime);
+      if (profile) {
+        const itemData = profile.clubs.map((club) => {
+          return {
+            img: club.profile,
+            title: club.name,
+            url: club.url,
+          };
+        });
+        setClubs(itemData);
+      }
     }
-  }, []);
+  }, [userInfo]);
 
   useEffect(() => {
-    if (profile) {
-      const itemData = profile.clubs.map((club) => {
-        return {
-          img: club.profile,
-          title: club.name,
-          url: club.url,
-        };
-      });
-      setClubs(itemData);
+    if (profileStatus === "success") {
+      if (profile) {
+        const itemData = profile.clubs.map((club) => {
+          return {
+            img: club.profile,
+            title: club.name,
+            url: club.url,
+          };
+        });
+        setClubs(itemData);
+      }
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <div className="me">
       <SideBar />
-      <div className="main">
+      <div className="meContainer">
         <NavBar />
-        <div className="meContainer">
+        <div className="content">
           <div className="top">MY STATS</div>
           <div className="bottom">
             <div className="bottom-right">

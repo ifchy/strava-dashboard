@@ -103,11 +103,12 @@ const Widget = ({ type }) => {
             }}
           />
         ),
-        change:
+        change: Math.round(
           Math.abs(
             (oneMonthSeries.elapsedTime - twoMonthSeries.elapsedTime) /
               twoMonthSeries.elapsedTime
-          ) * 100,
+          ) * 100
+        ),
       };
       break;
     case "distance":

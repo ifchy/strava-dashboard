@@ -87,7 +87,12 @@
       border: 1px solid #7451f8;
       cursor: pointer;
       margin: 5px;
-
+      &.grow {
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
       &:nth-child(1) {
         background-color: whitesmoke;
       }

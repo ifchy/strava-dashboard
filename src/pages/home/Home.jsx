@@ -36,6 +36,8 @@ const Home = () => {
               <AddBoxIcon
                 id="addWorkout"
                 onClick={() => navigate("/activities/new")}
+                aria-label="addWorkout"
+                data-testid="test"
               />
             </span>
           </div>

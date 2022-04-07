@@ -1,19 +1,13 @@
 .me {
   display: flex;
-  overflow: cover;
-  .main {
-    display: flex;
-    flex-direction: column;
-    flex: 6;
-    align-self: flex-end;
-    justify-content: flex-start;
-    height: 100vh;
+  width: 100%;
 
-    .meContainer {
-      display: flex;
-      flex-direction: column;
-      align-self: center;
+  .meContainer {
+    flex: 6;
+
+    .content {
       width: 75%;
+      margin: auto;
 
       .top {
         display: flex;

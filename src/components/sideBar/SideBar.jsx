@@ -53,11 +53,11 @@ const SideBar = () => {
         <p className="title">THEME</p>
         <div className="picker">
           <div
-            className="colorOptions"
+            className="colorOptions grow"
             onClick={() => dispatch({ type: "LIGHT" })}
           ></div>
           <div
-            className="colorOptions"
+            className="colorOptions grow"
             onClick={() => dispatch({ type: "DARK" })}
           ></div>
         </div>

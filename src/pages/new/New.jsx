@@ -12,6 +12,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { grey } from "@mui/material/colors";
 import axios from "axios";
 import moment from "moment";
 import { useContext } from "react";
@@ -32,10 +33,13 @@ const New = () => {
   });
   const [valid, setValid] = useState(true);
   const handleChange = (event) => {
-    setValid(false);
     const name = event.target.name;
     const value = event.target.value;
-    validate(name, value) && setValid(true);
+    if (name === "start_date_local") {
+      validate(name, value) ? setValid(true) : setValid(false);
+    } else if (name === "description") {
+      validate(name, value) ? setValid(true) : setValid(false);
+    }
     setFormContents({
       ...formContents,
       [name]: value,
@@ -45,6 +49,10 @@ const New = () => {
   const validate = (name, value) => {
     if (name == "start_date_local") {
       const result = moment(value, "MM/DD/YYYY", true).isValid();
+      return result;
+    } else if (name == "description") {
+      const result = typeof value;
+      console.log(result);
       return result;
     }
   };
@@ -56,28 +64,23 @@ const New = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const submit = formatData();
-    // console.log(submit);
-    axios
-      .post(
-        "https://www.strava.com/api/v3/activities?access_token=fceeaa95d3d29938a39c6abf6912ec93be624d75",
-        submit
-      )
-      .then((response) => console.log(response));
-    // setSubmitted((submitted) => !submitted);
-    // setFormContents({ title: "", content: "", author: "" });
-    // setTimeout(() => {
-    //   setSubmitted((submitted) => !submitted);
-    // }, 2000);
+    console.log(submit);
+    // valid &&
+    //   axios
+    //     .post(
+    //       "https://www.strava.com/api/v3/activities?access_token=a0049b5aabda1974255d565d3757292127db5b2a",
+    //       submit
+    //     )
+    //     .then((response) => console.log(response));
   };
 
   const formatData = () => {
     const formmatted = {
       name: formContents.name,
       type: formContents.type,
-      start_date_local: moment(
-        formContents.start_date_local,
-        "MM/DD/YYYY"
-      ).toISOString(),
+      start_date_local: moment(formContents.start_date_local)
+        .add(8, "hours")
+        .toISOString(),
       elapsed_time: formContents.elapsed_time * 60,
       description: formContents.description,
       distance: formContents.distance * 1609.34,
@@ -85,8 +88,12 @@ const New = () => {
     };
     return formmatted;
   };
-  const activities = types.map((type) => {
-    return <MenuItem value={type}>{type}</MenuItem>;
+  const activities = types.map((type, index) => {
+    return (
+      <MenuItem key={index} value={type}>
+        {type}
+      </MenuItem>
+    );
   });
   return (
     <div className="new">
@@ -95,7 +102,7 @@ const New = () => {
         <NavBar />
         <div className="content">
           <div className="top">
-            <p>ADD ACTIVITY</p>
+            <p data-testid="test2">ADD ACTIVITY</p>
           </div>
           <div className="bottom">
             <div className="right">
@@ -125,47 +132,67 @@ const New = () => {
                       value={formContents.type}
                       label="Activty Type"
                       onChange={handleChange}
+                      className="formText"
                     >
                       {activities}
                     </Select>
                   </FormControl>
-                  <TextField
+                  {/* <TextField
                     name="type"
                     id="type"
                     onChange={handleChange}
                     label="Activity Type"
-                  />
+                  /> */}
                   <TextField
-                    error={valid ? "" : "error"}
+                    error={valid ? false : true}
                     name="start_date_local"
                     id="start_date_local"
                     onChange={handleChange}
-                    label="Activity Start Date (MM/DD/YYY)"
+                    label="Activity Start Date (MM/DD/YYYY)"
+                    helperText={valid ? "" : "Must be in MM/DD/YYYY format"}
+                    className="formText"
                   />
                   <TextField
                     name="elapsed_time"
                     id="elapsed_time"
                     label="Elapsed Time (Minutes)"
                     onChange={handleChange}
+                    className="formText"
                   />
                   <TextField
                     name="description"
                     id="description"
                     onChange={handleChange}
                     label="Activity Description"
+                    className="formText"
                   />
                   <TextField
                     name="distance"
                     id="distance"
                     onChange={handleChange}
                     label="Distance (Miles)"
+                    className="formText"
                   />
+                  {!valid && (
+                    <div className="formError">
+                      There is a problem with one of your entries!
+                    </div>
+                  )}
                   <div className="save">
                     <FormControlLabel
                       name="trainer"
                       id="trainer"
                       onClick={handleChecked}
-                      control={<Checkbox />}
+                      control={
+                        <Checkbox
+                          sx={{
+                            color: grey[800],
+                            "&.Mui-checked": {
+                              color: grey[600],
+                            },
+                          }}
+                        />
+                      }
                       label="Trainer?"
                     />
                     <Button

@@ -75,20 +75,15 @@
           padding: 10px;
           color: black;
 
-          .distance {
+          .distance,
+          .movingTime,
+          .elapsedTime {
             font-weight: bold;
             font-size: 24px;
 
-            .distanceText {
-              font-size: 18px;
-            }
-          }
-
-          .movingTime {
-            font-weight: bold;
-            font-size: 24px;
-
-            .movingTimeText {
+            .distanceText,
+            .movingTimeText,
+            .elapsedTimeText {
               font-size: 18px;
             }
           }
@@ -110,8 +105,18 @@
             }
           }
           .table {
+            background-size: 100% 200%;
+            background-image: linear-gradient(
+              to bottom,
+              #ffffff 50%,
+              #7551f883 50%
+            );
+            -webkit-transition: background-position 0.25s;
+            -moz-transition: background-position 0.25s;
+            transition: background-position 0.25s;
+
             &:hover {
-              background-color: #7551f883;
+              background-position: 0 -100%;
             }
           }
           .empty {

@@ -1,10 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .app.dark {
   background-color: #121212;
   color: #ffffff;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
   .sidebar {
     .center {
       li {
@@ -119,33 +119,48 @@
   }
 
   .meContainer {
-    .top {
-      background-color: #bb86fc;
-      color: #121212;
-    }
-
-    .bottom {
-      .bottom-right {
-        .tableHead {
-          background-color: #bb86fc;
-        }
-        .icon {
-          color: #121212;
-          background-color: #bb86fc;
-        }
-        .tableRow {
-          background-color: #121212;
-          .tableCell {
-            color: #ffffff;
-          }
-        }
+    .content {
+      .top {
+        background-color: #bb86fc;
+        color: #121212;
       }
 
-      .bottom-left {
-        .location {
-          color: #bb86fc;
+      .bottom {
+        .bottom-right {
+          .tableHead {
+            background-color: #bb86fc;
+          }
           .icon {
+            color: #121212;
+            background-color: #bb86fc;
+          }
+          .tableRow {
+            .tableCell {
+              color: #ffffff;
+              background-color: #121212;
+              background-size: 100% 200%;
+              background-image: linear-gradient(
+                to bottom,
+                #121212 50%,
+                #bb86fc 50%
+              );
+              -webkit-transition: background-position 0.25s;
+              -moz-transition: background-position 0.25s;
+              transition: background-position 0.25s;
+
+              &:hover {
+                background-position: 0 -100%;
+              }
+            }
+          }
+        }
+
+        .bottom-left {
+          .location {
             color: #bb86fc;
+            .icon {
+              color: #bb86fc;
+            }
           }
         }
       }
@@ -197,7 +212,10 @@
   .formText {
     border: 1px solid #ffffff;
     &:hover {
-      border: none;
+      pointer-events: none;
+    }
+    &:focus {
+      border-color: #ffffff;
     }
   }
   .inputs {
