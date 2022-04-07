@@ -83,6 +83,8 @@ const Me = () => {
         ),
       ];
       setAllTime(allTime);
+    }
+    if (profileStatus === "success") {
       if (profile) {
         const itemData = profile.clubs.map((club) => {
           return {

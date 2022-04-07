@@ -21,7 +21,7 @@ const Single = () => {
 
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=a0049b5aabda1974255d565d3757292127db5b2a`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=a8f9a52858d2b70c361698b6ae730e1b26312de4`
     );
     setData(res.data);
   };

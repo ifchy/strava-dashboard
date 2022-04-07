@@ -32,7 +32,10 @@ const New = () => {
     trainer: "",
   });
   const [valid, setValid] = useState(true);
+  const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const handleChange = (event) => {
+    setSubmitted(false);
     const name = event.target.name;
     const value = event.target.value;
     if (name === "start_date_local") {
@@ -48,13 +51,21 @@ const New = () => {
 
   const validate = (name, value) => {
     if (name == "start_date_local") {
-      const result = moment(value, "MM/DD/YYYY", true).isValid();
-      return result;
-    } else if (name == "description") {
-      const result = typeof value;
-      console.log(result);
-      return result;
+      const testTime = moment(value, "MM/DD/YYYY", true).isValid();
+      let testEmpty;
+      if (value === "") {
+        setError(false);
+        setValid(true);
+        testEmpty = true;
+      }
+      if (testTime || testEmpty) {
+        return true;
+      }
     }
+    // else if (name == "description") {
+    //   const result = typeof value;
+    //   return result;
+    // }
   };
 
   const handleChecked = (event) => {
@@ -64,14 +75,21 @@ const New = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const submit = formatData();
-    console.log(submit);
-    // valid &&
-    //   axios
-    //     .post(
-    //       "https://www.strava.com/api/v3/activities?access_token=a0049b5aabda1974255d565d3757292127db5b2a",
-    //       submit
-    //     )
-    //     .then((response) => console.log(response));
+    // valid ? setError(true) : setError(false);
+    valid &&
+      axios
+        .post(
+          "https://www.strava.com/api/v3/activities?access_token=a8f9a52858d2b70c361698b6ae730e1b26312de4",
+          submit
+        )
+        .then((response) => {
+          response.status == 201 && setSubmitted(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError(true);
+          setSubmitted(true);
+        });
   };
 
   const formatData = () => {
@@ -173,9 +191,11 @@ const New = () => {
                     label="Distance (Miles)"
                     className="formText"
                   />
-                  {!valid && (
-                    <div className="formError">
-                      There is a problem with one of your entries!
+                  {submitted && (
+                    <div className={error ? "formError" : "formSuccess"}>
+                      {error
+                        ? "Something went wrong!"
+                        : "Activity uploaded successfully!"}
                     </div>
                   )}
                   <div className="save">
@@ -199,6 +219,7 @@ const New = () => {
                       type="submit"
                       onClick={handleSubmit}
                       variant="contained"
+                      disabled={formContents.name === "" && true}
                     >
                       Save
                     </Button>
