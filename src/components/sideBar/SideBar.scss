@@ -1,7 +1,10 @@
+@import '/src/utils/variables.scss';
+
 .sidebar {
   flex: 1;
   border-right: 0.5px solid rgb(163, 162, 162);
   min-height: 100vh;
+  width: $SIDEBAR_WIDTH;
 
   .top {
     height: 50px;
