@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -48,7 +47,7 @@ const New = () => {
   };
 
   const validate = (name, value) => {
-    if (name == "start_date_local") {
+    if (name === "start_date_local") {
       const testTime = moment(value, "MM/DD/YYYY", true).isValid();
       let testEmpty;
       if (value === "") {
@@ -81,7 +80,7 @@ const New = () => {
           submit
         )
         .then((response) => {
-          response.status == 201 && setSubmitted(true);
+          response.status === 201 && setSubmitted(true);
         })
         .catch((error) => {
           console.log(error);

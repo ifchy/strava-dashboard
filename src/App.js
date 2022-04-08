@@ -1,11 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Routes,
-  useParams,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";

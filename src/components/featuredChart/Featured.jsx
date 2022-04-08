@@ -1,8 +1,7 @@
 import "./Featured.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import "react-circular-progressbar/dist/styles.css";
-import { getStravaData, allData } from "../../features/stravaData";
-import { useDispatch, useSelector } from "react-redux";
+import { allData } from "../../features/stravaData";
+import { useSelector } from "react-redux";
 import moment from "moment";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
