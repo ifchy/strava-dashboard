@@ -1,8 +1,8 @@
 import "./Chart.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import moment from "moment";
-import { getStravaData, allData } from "../../features/stravaData";
-import { useDispatch, useSelector } from "react-redux";
+import { allData } from "../../features/stravaData";
+import { useSelector } from "react-redux";
 import {
   AreaChart,
   Area,
@@ -243,6 +243,8 @@ const Chart = () => {
       break;
     case "Elapsed time":
       ending = "minutes";
+      break;
+    default:
       break;
   }
   return (

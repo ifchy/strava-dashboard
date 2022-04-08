@@ -5,10 +5,9 @@ import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import TimerIcon from "@mui/icons-material/Timer";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import StraightenIcon from "@mui/icons-material/Straighten";
-import { getStravaData, allData } from "../../features/stravaData";
-import { useDispatch, useSelector } from "react-redux";
+import { allData } from "../../features/stravaData";
+import { useSelector } from "react-redux";
 import moment from "moment";
-import { red } from "@mui/material/colors";
 
 const Widget = ({ type }) => {
   const { data } = useSelector(allData);

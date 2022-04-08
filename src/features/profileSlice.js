@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import moment from "moment";
 
 // const getAccessToken = () => {
 //   const headers = {
@@ -29,7 +28,7 @@ export const getProfileData = createAsyncThunk(
   "data/getProfileData",
   async () => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/athlete?access_token=a8f9a52858d2b70c361698b6ae730e1b26312de4`
+      `https://www.strava.com/api/v3/athlete?access_token=1629be10d3d2c15f361724718eaea08625ab4889`
     );
     return res.data;
   }
