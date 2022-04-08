@@ -40,8 +40,6 @@ const New = () => {
     const value = event.target.value;
     if (name === "start_date_local") {
       validate(name, value) ? setValid(true) : setValid(false);
-    } else if (name === "description") {
-      validate(name, value) ? setValid(true) : setValid(false);
     }
     setFormContents({
       ...formContents,

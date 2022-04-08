@@ -96,7 +96,7 @@ const Me = () => {
         setClubs(itemData);
       }
     }
-  }, [userInfo]);
+  }, []);
 
   useEffect(() => {
     if (profileStatus === "success") {
