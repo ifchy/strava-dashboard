@@ -54,7 +54,6 @@ const Featured = () => {
 
   const handleChange = (e) => {
     setMetric(e.target.value);
-    console.log(metric);
   };
 
   return (
