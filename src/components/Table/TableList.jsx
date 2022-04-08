@@ -6,11 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import { getStravaData, allData } from "../../features/stravaData";
-import { getUserData } from "../../features/userSlice";
-import { getProfileData } from "../../features/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
