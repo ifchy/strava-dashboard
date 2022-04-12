@@ -28,7 +28,7 @@ export const getProfileData = createAsyncThunk(
   "data/getProfileData",
   async () => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/athlete?access_token=1629be10d3d2c15f361724718eaea08625ab4889`
+      `https://www.strava.com/api/v3/athlete?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10`
     );
     return res.data;
   }
