@@ -11,7 +11,7 @@
     A web-based dashboard to visualize historic Strava activites and display activity-specific data and profile information
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·<a href="https://strava-react-dashboard.netlify.app/">View Demo</a>
     ·
 </div>
 
