@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/othneildrew/Best-README-Template/raw/master/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Welcome to Strava Board!</h3>
@@ -11,7 +11,7 @@
     A web-based dashboard to visualize historic Strava activites and display activity-specific data and profile information
     <br />
     <br />
-    ·<a href="https://strava-react-dashboard.netlify.app/">View Demo</a>
+    · <a href="https://strava-react-dashboard.netlify.app/">View Demo</a>
     ·
 </div>
 
