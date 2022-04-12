@@ -21,7 +21,7 @@ const Single = () => {
 
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=1629be10d3d2c15f361724718eaea08625ab4889`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10`
     );
     setData(res.data);
   };
@@ -93,11 +93,11 @@ const Single = () => {
                 <div className="distanceText">Distance</div>
               </div>
               <div className="movingTime">
-                {data && moment.utc(data.moving_time * 1000).format("mm:ss")}
+                {data && moment.utc(data.moving_time * 1000).format("h:mm:ss")}
                 <div className="movingTimeText">Moving Time</div>
               </div>
               <div className="elapsedTime">
-                {data && moment.utc(data.elapsed_time * 1000).format("mm:ss")}
+                {data && moment.utc(data.elapsed_time * 1000).format("h:mm:ss")}
                 <div className="elapsedTimeText">Elapsed Time</div>
               </div>
             </div>

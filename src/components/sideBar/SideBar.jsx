@@ -1,13 +1,13 @@
-import "./SideBar.scss";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonIcon from "@mui/icons-material/Person";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import PeopleIcon from "@mui/icons-material/People";
-import RouteIcon from "@mui/icons-material/Route";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { DarkModeContext } from "../../features/context/darkReducer";
+import './SideBar.scss';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PeopleIcon from '@mui/icons-material/People';
+import RouteIcon from '@mui/icons-material/Route';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { DarkModeContext } from 'features/context/darkReducer';
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -21,12 +21,12 @@ const SideBar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li onClick={() => navigate("/")}>
+          <li onClick={() => navigate('/')}>
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
           <p className="title">LINKS</p>
-          <li onClick={() => navigate("/athlete")}>
+          <li onClick={() => navigate('/athlete')}>
             <PersonIcon className="icon" />
             <span>Me</span>
           </li>
@@ -54,11 +54,11 @@ const SideBar = () => {
         <div className="picker">
           <div
             className="colorOptions grow"
-            onClick={() => dispatch({ type: "LIGHT" })}
+            onClick={() => dispatch({ type: 'LIGHT' })}
           ></div>
           <div
             className="colorOptions grow"
-            onClick={() => dispatch({ type: "DARK" })}
+            onClick={() => dispatch({ type: 'DARK' })}
           ></div>
         </div>
       </div>

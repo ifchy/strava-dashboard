@@ -1,9 +1,9 @@
-import "./NavBar.scss";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { Avatar } from "@mui/material";
-import { useContext } from "react";
-import { DarkModeContext } from "../../features/context/darkReducer";
+import './NavBar.scss';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import { Avatar } from '@mui/material';
+import { useContext } from 'react';
+import { DarkModeContext } from '../../features/context/darkReducer';
 
 const NavBar = () => {
   const { darkMode, dispatch } = useContext(DarkModeContext);
@@ -14,16 +14,16 @@ const NavBar = () => {
         <div className="search">
           <input type="text" placeholder="Search..." />
         </div>
-        <div className="title">STRAVA DASH BOARD</div>
+        <div className="title">STRAVA</div>
         <div className="items">
           <div className="toggle">
             <DarkModeOutlinedIcon
               className="icon"
-              onClick={() => dispatch({ type: "TOGGLE" })}
+              onClick={() => dispatch({ type: 'TOGGLE' })}
             />
             <LightModeOutlinedIcon
               className="icon"
-              onClick={() => dispatch({ type: "TOGGLE" })}
+              onClick={() => dispatch({ type: 'TOGGLE' })}
             />
             <div
               className="toggleButton"
@@ -31,11 +31,11 @@ const NavBar = () => {
                 darkMode
                   ? {
                       left: 0,
-                      backgroundColor: "#bb86fc",
+                      backgroundColor: '#bb86fc',
                     }
                   : { right: 0 }
               }
-              onClick={() => dispatch({ type: "TOGGLE" })}
+              onClick={() => dispatch({ type: 'TOGGLE' })}
             ></div>
           </div>
           <div className="item">
@@ -44,11 +44,11 @@ const NavBar = () => {
               style={
                 darkMode
                   ? {
-                      backgroundColor: "#3700b3",
-                      border: "1px solid #bb86fc69",
+                      backgroundColor: '#3700b3',
+                      border: '1px solid #bb86fc69',
                     }
                   : {
-                      backgroundColor: "gray",
+                      backgroundColor: 'gray',
                     }
               }
             >

@@ -76,7 +76,7 @@ const New = () => {
     valid &&
       axios
         .post(
-          "https://www.strava.com/api/v3/activities?access_token=1629be10d3d2c15f361724718eaea08625ab4889",
+          "https://www.strava.com/api/v3/activities?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10",
           submit
         )
         .then((response) => {
