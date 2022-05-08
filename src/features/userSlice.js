@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { user_data_raw } from "./data/userData_raw";
 
 // const getAccessToken = () => {
 //   const headers = {
@@ -26,13 +27,13 @@ import axios from "axios";
 
 export const getUserData = createAsyncThunk("data/getUserData", async () => {
   const res = await axios.get(
-    `https://www.strava.com/api/v3/athletes/762309/stats?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10`
+    `https://www.strava.com/api/v3/athletes/762309/stats?access_token=3819e8601574e55e59888263e78cce6b7186ae89`
   );
   return res.data;
 });
 
 const initialState = {
-  user: [],
+  user: user_data_raw,
   status: "idle",
   error: null,
 };

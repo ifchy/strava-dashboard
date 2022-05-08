@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { profile_data_raw } from "./data/profileData_raw";
 // const getAccessToken = () => {
 //   const headers = {
 //     Accept: "application/json, text/plain, */*",
@@ -28,14 +28,14 @@ export const getProfileData = createAsyncThunk(
   "data/getProfileData",
   async () => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/athlete?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10`
+      `https://www.strava.com/api/v3/athlete?access_token=3819e8601574e55e59888263e78cce6b7186ae89`
     );
     return res.data;
   }
 );
 
 const initialState = {
-  profile: [],
+  profile: profile_data_raw,
   status: "idle",
   error: null,
 };
