@@ -35,7 +35,7 @@ export const getProfileData = createAsyncThunk(
 );
 
 const initialState = {
-  profile: profile_data_raw,
+  profile: profile_data_raw[0],
   status: "idle",
   error: null,
 };

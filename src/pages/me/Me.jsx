@@ -33,19 +33,29 @@ const Me = () => {
   function createData(name, metric) {
     return { name, metric };
   }
-  useEffect(() => {}, []);
 
   useEffect(() => {
-    // getRides();
     if (dataStatus === "idle") {
-      dispatch(getUserData());
-      setUserInfo(user);
-      dispatch(getProfileData());
+      try {
+        dispatch(getUserData());
+        setUserInfo(user);
+        dispatch(getProfileData());
+        console.log(
+          `${Math.floor((user.ytd_ride_totals.distance * 0.062137) / 100)} mi`
+        );
+      } catch {
+        setUserInfo(user[0]);
+        if (userInfo) {
+          console.log(
+            `${Math.floor((user.ytd_ride_totals.distance * 0.062137) / 100)} mi`
+          );
+        }
+      }
     }
   }, []);
 
   useEffect(() => {
-    if (dataStatus === "success") {
+    if (userInfo) {
       const rows = [
         createData(
           "Distance",
@@ -83,32 +93,18 @@ const Me = () => {
       ];
       setAllTime(allTime);
     }
-    if (profileStatus === "success") {
-      if (profile) {
-        const itemData = profile.clubs.map((club) => {
-          return {
-            img: club.profile,
-            title: club.name,
-            url: club.url,
-          };
-        });
-        setClubs(itemData);
-      }
-    }
-  }, []);
+  }, [userInfo]);
 
   useEffect(() => {
-    if (profileStatus === "success") {
-      if (profile) {
-        const itemData = profile.clubs.map((club) => {
-          return {
-            img: club.profile,
-            title: club.name,
-            url: club.url,
-          };
-        });
-        setClubs(itemData);
-      }
+    if (profile) {
+      const itemData = profile.clubs.map((club) => {
+        return {
+          img: club.profile,
+          title: club.name,
+          url: club.url,
+        };
+      });
+      setClubs(itemData);
     }
   }, [userInfo]);
 

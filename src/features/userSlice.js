@@ -33,7 +33,7 @@ export const getUserData = createAsyncThunk("data/getUserData", async () => {
 });
 
 const initialState = {
-  user: user_data_raw,
+  user: user_data_raw[0],
   status: "idle",
   error: null,
 };

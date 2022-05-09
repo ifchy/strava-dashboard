@@ -125,7 +125,11 @@ const New = () => {
                 component="form"
                 sx={{
                   multilineColor: darkMode ? "#ffffff" : "red",
-                  "& .MuiTextField-root": { m: 1, width: "100%" },
+                  "& .MuiTextField-root": {
+                    m: 1,
+                    width: "100%",
+                    color: "#FFF",
+                  },
                 }}
                 noValidate
                 autoComplete="off"
@@ -217,6 +221,10 @@ const New = () => {
                       onClick={handleSubmit}
                       variant="contained"
                       disabled={formContents.name === "" && true}
+                      sx={{
+                        backgroundColor: darkMode && "#FFF",
+                        color: darkMode && "#000",
+                      }}
                     >
                       Save
                     </Button>
