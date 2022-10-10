@@ -4,11 +4,13 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import New from "./pages/new/New";
 import Single from "./pages/single/Single";
-import FetchData from "./FetchData";
 import Me from "./pages/me/Me";
 import "./theme/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./features/context/darkReducer";
+import Redirect from "pages/redirect/Redirect";
+import { useSelector } from "react-redux";
+import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -20,8 +22,15 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            <Route path="athlete" element={<Me />} />
-            <Route path="test" element={<FetchData />} />
+            <Route
+              path="athlete"
+              element={
+                <ProtectedRoute>
+                  <Me />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="redirect/exchange_token" element={<Redirect />} />
             <Route path="activities">
               <Route index element={<List />} />
               <Route path=":activityId" element={<Single />} />

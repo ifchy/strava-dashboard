@@ -17,6 +17,7 @@ import moment from "moment";
 import { useContext } from "react";
 import { DarkModeContext } from "../../features/context/darkReducer";
 import { types } from "./activityTypes";
+import { useSelector } from "react-redux";
 
 const New = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -33,6 +34,8 @@ const New = () => {
   const [valid, setValid] = useState(true);
   const [error, setError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { access_token } = useSelector((state) => state.token.token);
+
   const handleChange = (event) => {
     setSubmitted(false);
     const name = event.target.name;
@@ -76,7 +79,7 @@ const New = () => {
     valid &&
       axios
         .post(
-          "https://www.strava.com/api/v3/activities?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10",
+          `https://www.strava.com/api/v3/activities?access_token=${access_token}`,
           submit
         )
         .then((response) => {

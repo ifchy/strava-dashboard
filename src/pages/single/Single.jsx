@@ -12,16 +12,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import store from "app/store";
 const Single = () => {
   const [data, setData] = useState();
   const [rows, setRows] = useState();
   const { activityId } = useParams();
   // const [activity, setActivity] = useState(activityId);
-
+  const { access_token } = useSelector((state) => state.token.token);
   const getSingle = async (activityId) => {
     const res = await axios.get(
-      `https://www.strava.com/api/v3/activities/${activityId}?access_token=026b5ffd7a61b0234a20436fefa41fffa067bb10`
+      `https://www.strava.com/api/v3/activities/${activityId}?access_token=${access_token}`
     );
     setData(res.data);
   };
@@ -58,7 +59,7 @@ const Single = () => {
       setRows(createRows);
     }
   }, [data]);
-
+  const token = store.getState().token;
   function createData(name, avg, max) {
     return { name, avg, max };
   }
@@ -74,7 +75,9 @@ const Single = () => {
         <div className="bottom">
           <div className="left">
             <div className="left-top">
-              <div className="activityName">{data && data.name}</div>
+              <div className="activityName">
+                {data && token.token.access_token}
+              </div>
               <div className="date">
                 {data &&
                   moment(data.start_date).format(
