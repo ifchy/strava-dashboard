@@ -1,9 +1,28 @@
 import NavBar from "components/navBar/NavBar";
 import SideBar from "components/sideBar/SideBar";
-import React from "react";
+import React, { useEffect } from "react";
 import "./login.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAuthToken } from "features/auth/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.token.status);
+  const navigate = useNavigate();
+
+  const getToken = () => {
+    if (authStatus === "idle") {
+      dispatch(getAuthToken());
+    }
+  };
+
+  useEffect(() => {
+    if (authStatus === "success") {
+      navigate("/");
+    }
+  }, []);
+
   const redirectUrl = "http://localhost:3000/redirect";
   const scope = "activity:read_all,profile:read_all,activity:write";
 

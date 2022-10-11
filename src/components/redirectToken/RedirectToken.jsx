@@ -16,7 +16,7 @@ const RedirectToken = () => {
     }
   }, []);
   if (authStatus === "success") {
-    navigate("/athlete");
+    navigate("/");
   }
   return (
     <div className="login">
