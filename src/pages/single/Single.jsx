@@ -14,6 +14,8 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import store from "app/store";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+
 const Single = () => {
   const [data, setData] = useState();
   const [rows, setRows] = useState();
@@ -85,7 +87,23 @@ const Single = () => {
                   )}
               </div>
             </div>
-            <div className="left-middle"></div>
+            <div className="left-middle">
+              <MapContainer
+                center={[51.505, -0.09]}
+                zoom={13}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[51.505, -0.09]}>
+                  <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
           </div>
           <div className="right">
             <div className="right-top">

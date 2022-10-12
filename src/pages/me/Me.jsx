@@ -28,7 +28,7 @@ const Me = () => {
   const { profile } = useSelector(profileData);
   const dispatch = useDispatch();
   const dataStatus = useSelector((state) => state.user.status);
-  const profileStatus = useSelector((state) => state.profile.status);
+  const data = useSelector((state) => state.user.user);
 
   function createData(name, metric) {
     return { name, metric };
@@ -51,6 +51,9 @@ const Me = () => {
           );
         }
       }
+    }
+    if (dataStatus === "success") {
+      setUserInfo(user);
     }
   }, []);
 
@@ -93,7 +96,7 @@ const Me = () => {
       ];
       setAllTime(allTime);
     }
-  }, [userInfo]);
+  }, []);
 
   useEffect(() => {
     if (profile) {
@@ -106,7 +109,7 @@ const Me = () => {
       });
       setClubs(itemData);
     }
-  }, [userInfo]);
+  }, []);
 
   return (
     <div className="me">
