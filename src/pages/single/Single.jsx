@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import store from "app/store";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Single = () => {
   const [data, setData] = useState();
@@ -77,9 +77,7 @@ const Single = () => {
         <div className="bottom">
           <div className="left">
             <div className="left-top">
-              <div className="activityName">
-                {data && token.token.access_token}
-              </div>
+              <div className="activityName">{data && data.name}</div>
               <div className="date">
                 {data &&
                   moment(data.start_date).format(
@@ -88,21 +86,23 @@ const Single = () => {
               </div>
             </div>
             <div className="left-middle">
-              <MapContainer
-                center={[51.505, -0.09]}
-                zoom={13}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
-                  <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-                </Marker>
-              </MapContainer>
+              <div id="map">
+                <MapContainer
+                  center={[51.505, -0.09]}
+                  zoom={13}
+                  scrollWheelZoom={false}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={[51.505, -0.09]}>
+                    <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
             </div>
           </div>
           <div className="right">

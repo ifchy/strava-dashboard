@@ -19,7 +19,6 @@ const Redirect = () => {
       navigate("/");
     }
   }, [authStatus]);
-
   return (
     <div className="login">
       <SideBar />

@@ -7,7 +7,6 @@ const RedirectToken = () => {
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.token.status);
   const navigate = useNavigate();
-  // const { accessToken } = useSelector(authToken);
 
   useEffect(() => {
     // getRides();
