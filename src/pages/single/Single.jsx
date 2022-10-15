@@ -13,12 +13,35 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import store from "app/store";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  Marker,
+  Popup,
+  Polyline,
+} from "react-leaflet";
+import "polyline-encoded";
+
+function EncodedPolyline({ color, data }) {
+  const map = useMap();
+  useEffect(() => {
+    if (!map) return;
+    L.polyline(L.PolylineUtil.decode(data), {
+      color: "red",
+      weight: 5,
+    }).addTo(map);
+  }, [map, data, color]);
+  console.log(L.polyline(L.PolylineUtil.decode(data)).getLatLngs()[0].lat);
+  return null;
+}
 
 const Single = () => {
   const [data, setData] = useState();
   const [rows, setRows] = useState();
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
   const { activityId } = useParams();
   // const [activity, setActivity] = useState(activityId);
   const { access_token } = useSelector((state) => state.token.token);
@@ -59,9 +82,23 @@ const Single = () => {
         ),
       ];
       setRows(createRows);
+      const startData = L.polyline(
+        L.PolylineUtil.decode(data.map.polyline)
+      ).getLatLngs()[0];
+      const count = L.polyline(
+        L.PolylineUtil.decode(data.map.polyline)
+      ).getLatLngs().length;
+
+      const endData = L.polyline(
+        L.PolylineUtil.decode(data.map.polyline)
+      ).getLatLngs()[count - 1];
+      setStart(startData);
+      console.log(count);
+      console.log(endData);
+      setEnd(endData);
     }
   }, [data]);
-  const token = store.getState().token;
+
   function createData(name, avg, max) {
     return { name, avg, max };
   }
@@ -73,6 +110,7 @@ const Single = () => {
         <NavBar />
         <div className="top">
           <div className="title">ACTIVITY OVERVIEW</div>
+          <div className="title">{}</div>
         </div>
         <div className="bottom">
           <div className="left">
@@ -86,23 +124,29 @@ const Single = () => {
               </div>
             </div>
             <div className="left-middle">
-              <div id="map">
-                <MapContainer
-                  center={[51.505, -0.09]}
-                  zoom={13}
-                  scrollWheelZoom={false}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
+              <MapContainer
+                center={[33.95315119086205, -84.62824205841956]}
+                zoom={13}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {data && (
+                  <EncodedPolyline color={"red"} data={data.map.polyline} />
+                )}
+                {start && (
+                  <>
+                    <Marker position={[start.lat, start.lng]}>
+                      <Popup>Start</Popup>
+                    </Marker>
+                    <Marker position={[end.lat, end.lng]}>
+                      <Popup>End</Popup>
+                    </Marker>
+                  </>
+                )}
+              </MapContainer>
             </div>
           </div>
           <div className="right">

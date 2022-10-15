@@ -10,7 +10,6 @@ import List from "./pages/list/List";
 import New from "./pages/new/New";
 import Single from "./pages/single/Single";
 import Me from "./pages/me/Me";
-import Map from "pages/map/Map";
 import "./theme/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./features/context/darkReducer";
@@ -27,7 +26,6 @@ function App() {
         <Routes>
           <Route path="/">
             <Route path="login" element={<Login />} />
-            <Route path="map" element={<Map />} />
             <Route path="redirect/exchange_token" element={<Redirect />} />
             <Route element={<ProtectedRoute />}>
               <Route index element={<Home />} />

@@ -96,7 +96,7 @@ const Me = () => {
       ];
       setAllTime(allTime);
     }
-  }, [dataStatus, userInfo]);
+  }, []);
 
   useEffect(() => {
     if (profile) {
@@ -251,27 +251,23 @@ const Me = () => {
                     gridAutoColumns: "minmax(100px, 1fr)",
                   }}
                 >
-                  {clubs ? (
+                  {clubs &&
                     clubs.map((item) => (
                       <ImageListItem key={item.img} align="center">
-                        <a href={`https://www.strava.com/clubs/${item.url}`}>
-                          <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                          />
-                        </a>
+                        <img
+                          src={`${item.img}?w=248&fit=crop&auto=format`}
+                          srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                          alt={item.title}
+                          loading="lazy"
+                          href={`https://www.strava.com/clubs/${item.url}`}
+                        />
                         <ImageListItemBar
                           title={item.title}
                           position="below"
                           align="center"
                         />
                       </ImageListItem>
-                    ))
-                  ) : (
-                    <ImageListItem></ImageListItem>
-                  )}
+                    ))}
                 </ImageList>
               </div>
             </div>
