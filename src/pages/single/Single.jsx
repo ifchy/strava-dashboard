@@ -33,7 +33,16 @@ function EncodedPolyline({ color, data }) {
       weight: 5,
     }).addTo(map);
   }, [map, data, color]);
-  console.log(L.polyline(L.PolylineUtil.decode(data)).getLatLngs()[0].lat);
+  return null;
+}
+
+function MarkerColored({ coords, color, popupText }) {
+  const map = useMap();
+  useEffect(() => {
+    const marker = L.marker([coords.lat, coords.lng]).addTo(map);
+    marker._icon.classList.add(color);
+    marker.bindPopup(popupText);
+  }, [coords]);
   return null;
 }
 
@@ -134,16 +143,23 @@ const Single = () => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {data && (
-                  <EncodedPolyline color={"red"} data={data.map.polyline} />
+                  <EncodedPolyline
+                    color={"red"}
+                    data={data.map.summary_polyline}
+                  />
                 )}
                 {start && (
                   <>
-                    <Marker position={[start.lat, start.lng]}>
-                      <Popup>Start</Popup>
-                    </Marker>
-                    <Marker position={[end.lat, end.lng]}>
-                      <Popup>End</Popup>
-                    </Marker>
+                    <MarkerColored
+                      coords={start}
+                      color={"start"}
+                      popupText={"Start of Activity"}
+                    />
+                    <MarkerColored
+                      coords={end}
+                      color={"end"}
+                      popupText={"End of Activity"}
+                    />
                   </>
                 )}
               </MapContainer>
