@@ -45,7 +45,16 @@ function MarkerColored({ coords, color, popupText }) {
   }, [coords]);
   return null;
 }
-
+function MapZoom({ polyline }) {
+  const group = new L.featureGroup();
+  const map = useMap();
+  const coords = L.polyline(L.PolylineUtil.decode(polyline)).getLatLngs();
+  coords.map((coord) => {
+    L.marker([coord.lat, coord.lng]).addTo(group);
+  });
+  map.fitBounds(group.getBounds());
+  return null;
+}
 const Single = () => {
   const [data, setData] = useState();
   const [rows, setRows] = useState();
@@ -133,36 +142,32 @@ const Single = () => {
               </div>
             </div>
             <div className="left-middle">
-              <MapContainer
-                center={[33.95315119086205, -84.62824205841956]}
-                zoom={13}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {data && (
-                  <EncodedPolyline
-                    color={"red"}
-                    data={data.map.summary_polyline}
+              {start && (
+                <MapContainer
+                  center={[start.lat, start.lng]}
+                  zoom={13}
+                  scrollWheelZoom={false}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                )}
-                {start && (
-                  <>
-                    <MarkerColored
-                      coords={start}
-                      color={"start"}
-                      popupText={"Start of Activity"}
-                    />
-                    <MarkerColored
-                      coords={end}
-                      color={"end"}
-                      popupText={"End of Activity"}
-                    />
-                  </>
-                )}
-              </MapContainer>
+                  {data && (
+                    <EncodedPolyline color={"red"} data={data.map.polyline} />
+                  )}
+                  <MarkerColored
+                    coords={start}
+                    color={"start"}
+                    popupText={"Start of Activity"}
+                  />
+                  <MarkerColored
+                    coords={end}
+                    color={"end"}
+                    popupText={"End of Activity"}
+                  />
+                  <MapZoom polyline={data.map.polyline} />
+                </MapContainer>
+              )}
             </div>
           </div>
           <div className="right">
