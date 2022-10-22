@@ -17,7 +17,7 @@
     "moment": "^2.29.4",
     "polyline-encoded": "^0.0.9",
     "react": "^18.2.0",
-    "react-calendar-heatmap": "^1.8.1",
+    "react-calendar-heatmap": "^1.9.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.1.0",
     "react-redux": "^7.2.9",
