@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import NavBar from "components/navBar/NavBar";
 import SideBar from "components/sideBar/SideBar";
-import RedirectToken from "components/redirectToken/RedirectToken";
 import "./redirect.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

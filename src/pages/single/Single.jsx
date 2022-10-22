@@ -14,14 +14,7 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import L from "leaflet";
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-  Marker,
-  Popup,
-  Polyline,
-} from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "polyline-encoded";
 
 function EncodedPolyline({ color, data }) {
@@ -39,7 +32,7 @@ function EncodedPolyline({ color, data }) {
 function MarkerColored({ coords, color, popupText }) {
   const map = useMap();
   useEffect(() => {
-    const marker = L.marker([coords.lat, coords.lng]).addTo(map);
+    const marker = L.marker([coords[0], coords[1]]).addTo(map);
     marker._icon.classList.add(color);
     marker.bindPopup(popupText);
   }, [coords]);
@@ -58,8 +51,6 @@ function MapZoom({ polyline }) {
 const Single = () => {
   const [data, setData] = useState();
   const [rows, setRows] = useState();
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
   const { activityId } = useParams();
   // const [activity, setActivity] = useState(activityId);
   const { access_token } = useSelector((state) => state.token.token);
@@ -100,20 +91,6 @@ const Single = () => {
         ),
       ];
       setRows(createRows);
-      const startData = L.polyline(
-        L.PolylineUtil.decode(data.map.polyline)
-      ).getLatLngs()[0];
-      const count = L.polyline(
-        L.PolylineUtil.decode(data.map.polyline)
-      ).getLatLngs().length;
-
-      const endData = L.polyline(
-        L.PolylineUtil.decode(data.map.polyline)
-      ).getLatLngs()[count - 1];
-      setStart(startData);
-      console.log(count);
-      console.log(endData);
-      setEnd(endData);
     }
   }, [data]);
 
@@ -142,9 +119,9 @@ const Single = () => {
               </div>
             </div>
             <div className="left-middle">
-              {start && (
+              {data && (
                 <MapContainer
-                  center={[start.lat, start.lng]}
+                  center={[data.start_latlng[0], data.start_latlng[1]]}
                   zoom={13}
                   scrollWheelZoom={false}
                 >
@@ -156,12 +133,12 @@ const Single = () => {
                     <EncodedPolyline color={"red"} data={data.map.polyline} />
                   )}
                   <MarkerColored
-                    coords={start}
+                    coords={data.start_latlng}
                     color={"start"}
                     popupText={"Start of Activity"}
                   />
                   <MarkerColored
-                    coords={end}
+                    coords={data.end_latlng}
                     color={"end"}
                     popupText={"End of Activity"}
                   />
@@ -185,6 +162,11 @@ const Single = () => {
               <div className="elapsedTime">
                 {data && moment.utc(data.elapsed_time * 1000).format("h:mm:ss")}
                 <div className="elapsedTimeText">Elapsed Time</div>
+              </div>
+              <div className="elevationGain">
+                {data && Math.round(data.total_elevation_gain * 3.28084)}
+                ft
+                <div className="elevationGainText">Elevation Gain</div>
               </div>
             </div>
             <div className="right-bottom">

@@ -28,7 +28,6 @@ const Me = () => {
   const { profile } = useSelector(profileData);
   const dispatch = useDispatch();
   const dataStatus = useSelector((state) => state.user.status);
-  const data = useSelector((state) => state.user.user);
 
   function createData(name, metric) {
     return { name, metric };

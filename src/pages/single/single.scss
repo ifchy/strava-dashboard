@@ -89,13 +89,15 @@
 
           .distance,
           .movingTime,
-          .elapsedTime {
+          .elapsedTime,
+          .elevationGain {
             font-weight: bold;
             font-size: 24px;
 
             .distanceText,
             .movingTimeText,
-            .elapsedTimeText {
+            .elapsedTimeText,
+            .elevationGainText {
               font-size: 18px;
             }
           }

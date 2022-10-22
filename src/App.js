@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
@@ -14,7 +9,6 @@ import "./theme/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./features/context/darkReducer";
 import Redirect from "pages/redirect/Redirect";
-import { useSelector } from "react-redux";
 import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {

@@ -1,13 +1,12 @@
-import { getAuthToken, authToken } from "features/auth/authSlice";
+import { getAuthToken } from "features/auth/authSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RedirectToken = () => {
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.token.status);
   const navigate = useNavigate();
-  // const { accessToken } = useSelector(authToken);
 
   useEffect(() => {
     // getRides();

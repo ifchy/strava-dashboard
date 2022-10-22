@@ -2,20 +2,12 @@ import NavBar from "components/navBar/NavBar";
 import SideBar from "components/sideBar/SideBar";
 import React, { useEffect } from "react";
 import "./login.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAuthToken } from "features/auth/authSlice";
 
 const Login = () => {
-  const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.token.status);
   const navigate = useNavigate();
-
-  const getToken = () => {
-    if (authStatus === "idle") {
-      dispatch(getAuthToken());
-    }
-  };
 
   useEffect(() => {
     if (authStatus === "success") {
