@@ -16,6 +16,81 @@ import { useSelector } from "react-redux";
 import L from "leaflet";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "polyline-encoded";
+import * as d3 from "d3";
+
+// const DrawChart = ({ coords, data }) => {
+//   const margin = { top: 0, right: 0, bottom: 15, left: 50 };
+//   const width = 700 - margin.left - margin.right;
+//   const height = 155 - margin.top - margin.bottom;
+//   const xAxisTicks = 8;
+//   const yAxisTicks = 6;
+//   const makeXGridlines = (xScale) => d3.axisBottom(xScale).ticks(xAxisTicks);
+//   const makeYGridlines = (yScale) => d3.axisLeft(yScale).ticks(yAxisTicks);
+//   useEffect(() => {
+//     const xScale = d3
+//       .scaleLinear()
+//       .domain(d3.extent(data, (d) => d.x))
+//       .range([0, width]);
+//     const yScale = d3
+//       .scaleLinear()
+//       .domain([d3.min(data, (co) => co.y), d3.max(data, (co) => co.y)])
+//       .range([height, 0]);
+//     const svg = d3
+//       .select("#elevationChart")
+//       .append("svg")
+//       .attr("width", 700)
+//       .attr("height", 155)
+//       .attr("viewBox", "0 0 " + width + " " + 160)
+//       .attr("preserveAspectRatio", "xMinYMid")
+//       .append("g")
+//       .attr("transform", `translate(${margin.left}, 2.5)`);
+//     const area = d3
+//       .area()
+//       .x((d) => xScale(d.x))
+//       .y0(yScale(yScale.domain()[0]))
+//       .y1((d) => yScale(d.y))
+//       .curve(d3.curveCatmullRom.alpha(0.005));
+//     svg
+//       .append("g")
+//       .attr("transform", `translate(0, ${height})`)
+//       .call(d3.axisBottom(xScale));
+//     svg.append("g").call(d3.axisLeft(yScale));
+//     // Make X grid:
+//     svg
+//       .append("g")
+//       .attr("class", "chartGrid")
+//       .attr("transform", `translate(0, ${height})`)
+//       .call(
+//         makeXGridlines(xScale)
+//           // STRETCH IT PARALLEL TO Y:
+//           .tickSize(-height)
+//           // NO FORMAT, THESE JUST BE LINES:
+//           .tickFormat("")
+//       );
+//     // Make Y grid:
+//     svg.append("g").attr("class", "chartGrid").call(
+//       makeYGridlines(yScale)
+//         // STRETCH IT PARALLEL TO X:
+//         .tickSize(-width)
+//         // NO FORMAT, THESE JUST BE LINES:
+//         .tickFormat("")
+//     );
+//     svg
+//       .append("path")
+//       .attr("d", area(data))
+//       .attr("class", "chartLine")
+//       .style("stroke", "#787979")
+//       .style("stroke-opacity", 0.2)
+//       .style("stroke-width", 1)
+//       .style("fill", "#787979")
+//       .style("fill-opacity", 0.2);
+//   }, []);
+//   return (
+//     <div>
+//       <div id="elevationChart" />
+//     </div>
+//   );
+// };
 
 function EncodedPolyline({ color, data }) {
   const map = useMap();
@@ -215,6 +290,17 @@ const Single = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              
+              {/* && (
+                <DrawChart
+                  data={[
+                    { x: 5, y: 15 },
+                    { x: 15, y: 20 },
+                    { x: 35, y: 5 },
+                  ]}
+                  coords={data.start_latlng}
+                />
+              )} */}
             </div>
           </div>
         </div>
