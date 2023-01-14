@@ -19,7 +19,7 @@ const Login = () => {
   const scope = "activity:read_all,profile:read_all,activity:write";
 
   const handleLogin = () => {
-    window.location = `http://www.strava.com/oauth/authorize?client_id=80161&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=${scope}`;
+    window.location = `http://www.strava.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=${scope}`;
   };
 
   return (

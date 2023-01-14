@@ -8,7 +8,7 @@ const cleanUpAuthToken = (str) => {
 const testAuthGetter = async (authTok) => {
   try {
     const response = await axios.post(
-      `https://www.strava.com/api/v3/oauth/token?client_id=80161&client_secret=9ecaf49393024b2e29790ebdbf44c55e963d922d&code=${authTok}&grant_type=authorization_code`
+      `https://www.strava.com/api/v3/oauth/token?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&code=${authTok}&grant_type=authorization_code`
     );
     console.log(response.data);
     return response.data;
