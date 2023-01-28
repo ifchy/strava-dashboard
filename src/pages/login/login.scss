@@ -24,6 +24,9 @@
           margin: 0;
         }
       }
+      
+      button.bottom{cursor: pointer;}
+
       .bottom {
         -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(155, 155, 155, 0.47);
@@ -31,27 +34,11 @@
         padding: 10px;
         margin: 20px;
 
+
         .right {
           width: 80%;
           margin: auto;
           text-align: center;
-
-          form {
-            width: 100%;
-            .inputs {
-              margin-left: auto;
-              width: 100%;
-            }
-            .formError {
-              color: red;
-            }
-            .formSuccess {
-              color: green;
-            }
-          }
-          .save {
-            margin-left: 10px;
-          }
         }
       }
     }

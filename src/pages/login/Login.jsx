@@ -27,9 +27,11 @@ const Login = () => {
       <SideBar />
       <div className="loginContainer">
         <NavBar />
-        <div>
-          <h1>Login</h1>
-          <button onClick={handleLogin}>Connect with Strava</button>
+        <div className="content">
+          <div >
+            <h1 className="top">Get Started With Strava Dashboard</h1>
+            <button onClick={handleLogin} className="bottom">Connect with Strava</button>
+          </div>
         </div>
       </div>
     </div>
